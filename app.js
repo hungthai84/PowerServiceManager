@@ -621,11 +621,6 @@ parentButtons.forEach(btn => {
     
     if (!wasOpen) {
       group.classList.add('open');
-      // Click first child automatically only if not collapsed
-      if (!sidebar.classList.contains('collapsed')) {
-        const firstChild = group.querySelector('.nav-child-item');
-        if (firstChild) firstChild.click();
-      }
     }
   });
 });
@@ -650,11 +645,9 @@ childItems.forEach(item => {
     pageTitle.textContent = `${deptName} - ${meta.label}`;
     switchView(view, meta);
 
-    // Close the popup if collapsed
-    if (sidebar.classList.contains('collapsed')) {
-      const group = item.closest('.nav-parent-group');
-      if (group) group.classList.remove('open');
-    }
+    // Close the popup after clicking
+    const group = item.closest('.nav-parent-group');
+    if (group) group.classList.remove('open');
   });
 });
 
@@ -1137,12 +1130,9 @@ if (defaultGroup) {
   }
 }
 
-// Close popups when clicking outside the menu items in collapsed mode
+// Close popups when clicking outside the menu items
 document.addEventListener('click', (e) => {
-  const sidebar = document.querySelector('.sidebar');
-  if (sidebar && sidebar.classList.contains('collapsed')) {
-    if (!e.target.closest('.nav-parent-group')) {
-      document.querySelectorAll('.nav-parent-group').forEach(g => g.classList.remove('open'));
-    }
+  if (!e.target.closest('.nav-parent-group')) {
+    document.querySelectorAll('.nav-parent-group').forEach(g => g.classList.remove('open'));
   }
 });
