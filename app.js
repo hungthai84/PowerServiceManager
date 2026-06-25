@@ -621,9 +621,11 @@ parentButtons.forEach(btn => {
     
     if (!wasOpen) {
       group.classList.add('open');
-      // Click first child automatically
-      const firstChild = group.querySelector('.nav-child-item');
-      if (firstChild) firstChild.click();
+      // Click first child automatically only if not collapsed
+      if (!sidebar.classList.contains('collapsed')) {
+        const firstChild = group.querySelector('.nav-child-item');
+        if (firstChild) firstChild.click();
+      }
     }
   });
 });
@@ -647,6 +649,12 @@ childItems.forEach(item => {
 
     pageTitle.textContent = `${deptName} - ${meta.label}`;
     switchView(view, meta);
+
+    // Close the popup if collapsed
+    if (sidebar.classList.contains('collapsed')) {
+      const group = item.closest('.nav-parent-group');
+      if (group) group.classList.remove('open');
+    }
   });
 });
 
@@ -1121,8 +1129,20 @@ initKanbanDragAndDrop();
 
 // Load first default item
 const defaultGroup = document.querySelector('.nav-parent-item[data-dept="Tổng quan"]').closest('.nav-parent-group');
-defaultGroup.classList.add('open');
-const defaultChild = defaultGroup.querySelector('.nav-child-item');
-if (defaultChild) {
-  defaultChild.click();
+if (defaultGroup) {
+  defaultGroup.classList.add('open');
+  const defaultChild = defaultGroup.querySelector('.nav-child-item');
+  if (defaultChild) {
+    defaultChild.click();
+  }
 }
+
+// Close popups when clicking outside the menu items in collapsed mode
+document.addEventListener('click', (e) => {
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar && sidebar.classList.contains('collapsed')) {
+    if (!e.target.closest('.nav-parent-group')) {
+      document.querySelectorAll('.nav-parent-group').forEach(g => g.classList.remove('open'));
+    }
+  }
+});
