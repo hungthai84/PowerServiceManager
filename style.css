@@ -105,6 +105,8 @@ body {
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+  position: relative;
+  z-index: 99;
 }
 
 .sidebar::-webkit-scrollbar {
