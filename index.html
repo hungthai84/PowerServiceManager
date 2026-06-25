@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Service - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Dynamic colorful background blobs for authentic glassmorphism -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <div class="dashboard-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <img src="https://i.ibb.co/j99RKkXf/Logo-App.png" alt="Power Service Logo" style="height: 32px; width: auto; border-radius: 6px;">
+          <span class="logo-text">Power Service</span>
+        </div>
+        <button class="btn-collapse" aria-label="Collapse Sidebar">
+          <i data-lucide="arrow-left-to-line"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- QUẢN TRỊ VĂN PHÒNG -->
+        <div class="nav-section">
+          <span class="nav-section-title">QUẢN TRỊ VĂN PHÒNG</span>
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Tổng quan">
+              <i data-lucide="layout-dashboard"></i>
+              <span class="nav-label">Tổng quan</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="overview" data-dept="Tổng quan" data-idx="0">Bảng tin chung</a></li>
+            </ul>
+          </div>
+          
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Quản lý dự án">
+              <i data-lucide="folder-kanban"></i>
+              <span class="nav-label">Quản lý dự án</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="overview" data-dept="Quản lý dự án" data-idx="0">Tổng quan dự án</a></li>
+              <li><a href="#" class="nav-child-item" data-view="project-goals" data-dept="Quản lý dự án" data-idx="1">Mục tiêu dự án</a></li>
+              <li><a href="#" class="nav-child-item" data-view="projects" data-dept="Quản lý dự án" data-idx="2">Danh sách dự án</a></li>
+              <li><a href="#" class="nav-child-item" data-view="tasks" data-dept="Quản lý dự án" data-idx="3">Tiến độ công việc</a></li>
+            </ul>
+          </div>
+
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Nhân sự (HR)">
+              <i data-lucide="users"></i>
+              <span class="nav-label">Nhân sự (HR)</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="hr" data-dept="Nhân sự (HR)" data-idx="0">Danh sách nhân sự</a></li>
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Nhân sự (HR)" data-idx="1" data-label="Tổng quan HR" data-desc="Báo cáo tổng hợp số liệu biến động nhân sự, tuyển dụng và đào tạo." data-icon="layout-dashboard">Tổng quan HR</a></li>
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Nhân sự (HR)" data-idx="2" data-label="Lương & Phúc lợi" data-desc="Theo dõi quỹ lương, bảng tính phúc lợi và các khoản thưởng hiệu suất." data-icon="wallet">Lương & Phúc lợi</a></li>
+            </ul>
+          </div>
+
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Truyền thông nội bộ">
+              <i data-lucide="megaphone"></i>
+              <span class="nav-label">Truyền thông nội bộ</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Truyền thông nội bộ" data-idx="0" data-label="Bảng tin" data-desc="Bảng tin chia sẻ thông điệp, văn hóa doanh nghiệp và tin tức nội bộ." data-icon="megaphone">Bảng tin</a></li>
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Truyền thông nội bộ" data-idx="1" data-label="Sự kiện" data-desc="Lập kế hoạch tổ chức sự kiện, ngày hội gia đình và hoạt động team building." data-icon="calendar">Sự kiện</a></li>
+            </ul>
+          </div>
+
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Pháp lý - Tuân thủ">
+              <i data-lucide="shield-check"></i>
+              <span class="nav-label">Pháp lý - Tuân thủ</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Pháp lý - Tuân thủ" data-idx="0" data-label="Hợp đồng & Pháp quy" data-desc="Lưu trữ văn bản pháp lý, rà soát điều khoản hợp đồng và rủi ro tuân thủ." data-icon="shield-check">Hợp đồng & Pháp quy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- QUẢN TRỊ KHÁCH HÀNG -->
+        <div class="nav-section">
+          <span class="nav-section-title">QUẢN TRỊ KHÁCH HÀNG</span>
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Bán hàng">
+              <i data-lucide="shopping-cart"></i>
+              <span class="nav-label">Bán hàng</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Bán hàng" data-idx="0" data-label="Phễu bán hàng" data-desc="Quản lý cơ hội, khách hàng tiềm năng, doanh số dự kiến và hợp đồng." data-icon="shopping-cart">Phễu bán hàng</a></li>
+            </ul>
+          </div>
+
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Marketing">
+              <i data-lucide="trending-up"></i>
+              <span class="nav-label">Marketing</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Marketing" data-idx="0" data-label="Chiến dịch quảng cáo" data-desc="Theo dõi ngân sách, hiệu quả ROI và tiếp cận khách hàng trên mạng xã hội." data-icon="trending-up">Chiến dịch quảng cáo</a></li>
+            </ul>
+          </div>
+
+          <div class="nav-parent-group">
+            <button class="nav-parent-item" data-dept="Phân tích dữ liệu">
+              <i data-lucide="bar-chart-3"></i>
+              <span class="nav-label">Phân tích dữ liệu</span>
+              <i data-lucide="chevron-right" class="chevron-icon"></i>
+            </button>
+            <ul class="nav-child-list">
+              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Phân tích dữ liệu" data-idx="0" data-label="Báo cáo dữ liệu" data-desc="Hệ thống BI phân tích hành vi người dùng và tăng trưởng doanh số." data-icon="bar-chart-3">Báo cáo dữ liệu</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <ul class="nav-list">
+          <li>
+            <a href="#" class="nav-item">
+              <i data-lucide="settings"></i>
+              <span class="nav-label">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- HEADER -->
+      <header class="main-header">
+        <h1 class="page-title">Tổng quan</h1>
+        <div class="header-actions"></div>
+      </header>
+
+      <!-- OVERVIEW VIEW CONTAINER -->
+      <div id="view-overview" class="view-container">
+        <!-- Overview stats -->
+        <div class="overview-stats">
+          <div class="stat-card">
+            <div class="stat-icon"><i data-lucide="folder-kanban"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Tổng số dự án</span>
+              <span class="stat-value" id="overview-total-projects">9</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i data-lucide="check-square"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Nhiệm vụ hoàn thành</span>
+              <span class="stat-value" id="overview-tasks-progress">386 / 480</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i data-lucide="users"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Thành viên hoạt động</span>
+              <span class="stat-value" id="overview-active-members">18</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i data-lucide="dollar-sign"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Tổng ngân sách</span>
+              <span class="stat-value" id="overview-total-budget">$192,400</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual charts and updates -->
+        <div class="overview-charts-grid">
+          <!-- Chart Card -->
+          <div class="chart-card">
+            <h3>Phân bổ dự án theo Phòng ban</h3>
+            <div class="chart-container">
+              <svg class="pie-chart" viewBox="0 0 120 120" width="160" height="160">
+                <circle class="pie-slice slice-1" cx="60" cy="60" r="50" stroke-dasharray="157 314" stroke-dashoffset="0" />
+                <circle class="pie-slice slice-2" cx="60" cy="60" r="50" stroke-dasharray="100 314" stroke-dashoffset="-157" />
+                <circle class="pie-slice slice-3" cx="60" cy="60" r="50" stroke-dasharray="57 314" stroke-dashoffset="-257" />
+              </svg>
+              <div class="chart-legend">
+                <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6"></span> Design (50%)</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#38bdf8"></span> Marketing (32%)</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#fb923c"></span> Development (18%)</div>
+              </div>
+            </div>
+          </div>
+          <!-- Activity feed -->
+          <div class="activity-card">
+            <h3>Hoạt động gần đây</h3>
+            <ul class="activity-list">
+              <li>
+                <span class="activity-time">Vừa xong</span>
+                <p><strong>Adam</strong> đã thêm dự án mới <em>Airbnb App Redesign</em></p>
+              </li>
+              <li>
+                <span class="activity-time">15 phút trước</span>
+                <p><strong>Emma Watson</strong> đã cập nhật trạng thái làm việc tại <em>Nhân sự (HR)</em></p>
+              </li>
+              <li>
+                <span class="activity-time">2 giờ trước</span>
+                <p><strong>Daniel</strong> đã hoàn thành 5 nhiệm vụ trong <em>Vox</em></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Goals Widget Section -->
+        <div class="chart-card" style="margin-top: 24px; padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="target" style="color: var(--primary);"></i> Mục tiêu chiến lược (OKRs)
+            </h3>
+            <button class="btn-primary" id="add-goal-btn" style="padding: 6px 12px; font-size: 0.85rem;">
+              <i data-lucide="plus"></i> Tạo Mục tiêu
+            </button>
+          </div>
+          <div class="goals-grid" id="goals-list-container">
+            <!-- Dynamic Goals Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT GOALS VIEW CONTAINER -->
+      <div id="view-project-goals" class="view-container" style="display: none;">
+        <!-- QUICK ACTIONS BAR -->
+        <section class="controls-bar" style="margin-bottom: 24px;">
+          <div style="display: flex; gap: 12px; width: 100%; align-items: center;">
+            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-muted); margin-right: 8px;">Tạo nhanh:</span>
+            <button class="btn-primary" id="quick-create-goal" style="display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="target"></i> Tạo Mục tiêu
+            </button>
+            <button class="btn-primary" id="quick-create-project" style="display: flex; align-items: center; gap: 8px; background: #10b981;">
+              <i data-lucide="folder-kanban"></i> Tạo Dự án
+            </button>
+            <button class="btn-primary" id="quick-create-task" style="display: flex; align-items: center; gap: 8px; background: #3b82f6;">
+              <i data-lucide="check-square"></i> Tạo Công việc
+            </button>
+          </div>
+        </section>
+
+        <!-- KPI STATS -->
+        <div class="overview-stats" style="margin-bottom: 24px;">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(139, 92, 246, 0.1); color: var(--primary);"><i data-lucide="target"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Tổng số mục tiêu</span>
+              <span class="stat-value" id="goals-stat-total">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i data-lucide="check-circle-2"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Đã hoàn thành</span>
+              <span class="stat-value" id="goals-stat-completed">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(249, 115, 22, 0.1); color: #f97316;"><i data-lucide="activity"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Đang thực hiện</span>
+              <span class="stat-value" id="goals-stat-inprogress">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOALS GRID -->
+        <div class="chart-card" style="padding: 24px;">
+          <h3 style="margin-bottom: 16px; font-size: 1.1rem; font-weight: 700; color: var(--text-main);">Danh sách mục tiêu dự án</h3>
+          <div class="goals-grid" id="project-goals-list-container">
+            <!-- Dynamic Goals Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS VIEW CONTAINER -->
+      <div id="view-projects" class="view-container" style="display: none;">
+        <!-- FILTER & ACTION BAR -->
+        <section class="controls-bar">
+          <div class="filters">
+            <div class="filter-group">
+              <label for="category-filter">Category</label>
+              <div class="select-wrapper">
+                <select id="category-filter">
+                  <option value="All">All</option>
+                  <option value="Design">Design</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Development">Development</option>
+                </select>
+                <i data-lucide="chevron-down"></i>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label for="sort-filter">Sort by</label>
+              <div class="select-wrapper">
+                <select id="sort-filter">
+                  <option value="upcoming">Upcoming</option>
+                  <option value="budget-high">Budget: High to Low</option>
+                  <option value="budget-low">Budget: Low to High</option>
+                  <option value="progress">Progress</option>
+                </select>
+                <i data-lucide="chevron-down"></i>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label for="search-input">Search</label>
+              <div class="search-bar">
+                <i data-lucide="search"></i>
+                <input type="text" id="search-input" placeholder="Search projects...">
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <div class="view-toggles">
+              <button class="view-btn active" id="grid-view-btn" title="Grid View">
+                <i data-lucide="layout-grid"></i>
+              </button>
+              <button class="view-btn" id="list-view-btn" title="List View">
+                <i data-lucide="list"></i>
+              </button>
+            </div>
+            <button class="btn-primary" id="add-project-btn">
+              <i data-lucide="plus"></i> Add New Project
+            </button>
+          </div>
+        </section>
+
+        <!-- PROJECTS VIEWPORT -->
+        <section class="projects-container grid-view" id="projects-grid">
+          <!-- Rendered via JavaScript -->
+        </section>
+      </div>
+
+      <!-- HR MANAGEMENT VIEW CONTAINER -->
+      <div id="view-hr" class="view-container" style="display: none;">
+        <!-- HR KPI STATS -->
+        <div class="hr-stats-row" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+          <div class="stat-card" style="padding: 16px;">
+            <div class="stat-icon" style="background: rgba(139, 92, 246, 0.1); color: var(--primary);"><i data-lucide="users"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Tổng Nhân Sự</span>
+              <span class="stat-value" id="hr-stat-total">4</span>
+            </div>
+          </div>
+          <div class="stat-card" style="padding: 16px;">
+            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i data-lucide="user-check"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Đang Hoạt Động</span>
+              <span class="stat-value" id="hr-stat-active">2</span>
+            </div>
+          </div>
+          <div class="stat-card" style="padding: 16px;">
+            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;"><i data-lucide="laptop"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Làm Việc Từ Xa</span>
+              <span class="stat-value" id="hr-stat-remote">1</span>
+            </div>
+          </div>
+          <div class="stat-card" style="padding: 16px;">
+            <div class="stat-icon" style="background: rgba(249, 115, 22, 0.1); color: #f97316;"><i data-lucide="calendar-off"></i></div>
+            <div class="stat-details">
+              <span class="stat-title">Nghỉ Phép</span>
+              <span class="stat-value" id="hr-stat-leave">1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- HR Grid Layout -->
+        <div class="hr-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+          <!-- Left Column: Employee List -->
+          <div class="hr-left-col">
+            <section class="controls-bar" style="margin-bottom: 16px;">
+              <div class="filters">
+                <div class="filter-group">
+                  <div class="search-bar">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="hr-search-input" placeholder="Tìm tên hoặc email...">
+                  </div>
+                </div>
+              </div>
+              <div class="actions">
+                <button class="btn-primary" id="add-employee-btn">
+                  <i data-lucide="user-plus"></i> Thêm Nhân Viên
+                </button>
+              </div>
+            </section>
+
+            <div class="employee-table-wrapper">
+              <table class="employee-table">
+                <thead>
+                  <tr>
+                    <th>Nhân viên</th>
+                    <th>Phòng ban</th>
+                    <th>Vai trò</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="employee-list-tbody">
+                  <!-- Rendered via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Column: Sub-Modules -->
+          <div class="hr-right-col" style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Recruitment Module -->
+            <div class="chart-card" style="padding: 20px;">
+              <h3 style="margin-bottom: 12px; font-size: 1rem; display: flex; align-items: center; gap: 8px;"><i data-lucide="briefcase" style="width:16px; height:16px; color:var(--primary);"></i>Tuyển dụng</h3>
+              <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                <span style="color:var(--text-muted); font-size:0.85rem;">Vị trí tuyển dụng</span>
+                <span style="font-weight:700; color:var(--text-main);">3 vị trí</span>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-muted); font-size:0.85rem;">Ứng viên ứng tuyển</span>
+                <span style="font-weight:700; color:var(--text-main);">12 hồ sơ</span>
+              </div>
+            </div>
+
+            <!-- Training Module -->
+            <div class="chart-card" style="padding: 20px;">
+              <h3 style="margin-bottom: 12px; font-size: 1rem; display: flex; align-items: center; gap: 8px;"><i data-lucide="graduation-cap" style="width:16px; height:16px; color:var(--primary);"></i>Đào tạo hội nhập</h3>
+              <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                <span style="color:var(--text-muted); font-size:0.85rem;">Nhân viên đang Onboarding</span>
+                <span style="font-weight:700; color:var(--text-main);">2 nhân sự</span>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-muted); font-size:0.85rem;">Tiến độ khóa học chuẩn</span>
+                <span style="font-weight:700; color:var(--text-main);">65% hoàn thành</span>
+              </div>
+            </div>
+
+            <!-- Approvals Module -->
+            <div class="chart-card" style="padding: 20px;">
+              <h3 style="margin-bottom: 12px; font-size: 1rem; display: flex; align-items: center; gap: 8px;"><i data-lucide="check-circle-2" style="width:16px; height:16px; color:var(--primary);"></i>Yêu cầu phê duyệt</h3>
+              <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(251,146,60,0.1); border:1px solid rgba(251,146,60,0.2); padding:10px; border-radius:8px;">
+                <div style="display:flex; flex-direction:column; gap:2px; text-align: left;">
+                  <span style="font-weight:700; font-size:0.85rem;">Nghỉ phép - Lê Thị D</span>
+                  <span style="font-size:0.75rem; color:var(--text-muted);">Lý do: Việc cá nhân gia đình</span>
+                </div>
+                <button class="btn-primary" style="padding: 4px 8px; font-size:0.75rem; border-radius:6px; background:#f97316; box-shadow:none;">Duyệt</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASKS VIEW CONTAINER -->
+      <div id="view-tasks" class="view-container" style="display: none;">
+        <!-- FILTER & ACTION BAR -->
+        <section class="controls-bar" style="margin-bottom: 24px;">
+          <div class="filters">
+            <div class="filter-group">
+              <label for="task-project-filter">Dự án</label>
+              <div class="select-wrapper">
+                <select id="task-project-filter">
+                  <option value="All">Tất cả dự án</option>
+                  <!-- Options populated dynamically -->
+                </select>
+                <i data-lucide="chevron-down"></i>
+              </div>
+            </div>
+            <div class="filter-group">
+              <label for="task-priority-filter">Độ ưu tiên</label>
+              <div class="select-wrapper">
+                <select id="task-priority-filter">
+                  <option value="All">Tất cả</option>
+                  <option value="high">Cao</option>
+                  <option value="medium">Trung bình</option>
+                  <option value="low">Thấp</option>
+                </select>
+                <i data-lucide="chevron-down"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn-primary" id="add-task-btn">
+              <i data-lucide="plus"></i> Thêm Công Việc
+            </button>
+          </div>
+        </section>
+
+        <!-- KANBAN BOARD -->
+        <div class="kanban-board">
+          <div class="kanban-column" data-status="todo">
+            <div class="column-header">
+              <h3>Cần làm</h3>
+              <span class="column-count" id="todo-count">0</span>
+            </div>
+            <div class="column-tasks" id="tasks-todo"></div>
+          </div>
+          <div class="kanban-column" data-status="inprogress">
+            <div class="column-header">
+              <h3>Đang làm</h3>
+              <span class="column-count" id="inprogress-count">0</span>
+            </div>
+            <div class="column-tasks" id="tasks-inprogress"></div>
+          </div>
+          <div class="kanban-column" data-status="done">
+            <div class="column-header">
+              <h3>Hoàn thành</h3>
+              <span class="column-count" id="done-count">0</span>
+            </div>
+            <div class="column-tasks" id="tasks-done"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GENERIC WORKSPACE VIEW CONTAINER -->
+      <div id="view-generic" class="view-container" style="display: none; padding: 40px; text-align: center;">
+        <div class="generic-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 60px 40px; box-shadow: var(--card-shadow); max-width: 500px; margin: 40px auto; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+          <div class="generic-icon-box" style="width: 80px; height: 80px; background: rgba(139, 92, 246, 0.1); color: var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+            <i id="generic-icon" data-lucide="help-circle" style="width: 40px; height: 40px;"></i>
+          </div>
+          <h2 id="generic-title" style="font-size: 1.6rem; font-weight: 700; color: var(--text-main);">Tính năng</h2>
+          <p id="generic-desc" style="font-size: 1rem; color: var(--text-muted); line-height: 1.6;">Giao diện của phân hệ đang được hoàn thiện và phát triển.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD PROJECT MODAL -->
+  <div class="modal-overlay" id="add-project-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Thêm Dự Án Mới</h2>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <form id="project-form">
+        <div class="form-group">
+          <label for="project-name">Tên dự án</label>
+          <input type="text" id="project-name" required placeholder="e.g. Airbnb App Redesign">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-category">Phân loại</label>
+            <select id="project-category" required>
+              <option value="Design">Thiết kế (Design)</option>
+              <option value="Marketing">Tiếp thị (Marketing)</option>
+              <option value="Development">Phát triển (Development)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="project-logo">Logo thương hiệu / Biểu tượng</label>
+            <select id="project-logo" required>
+              <option value="vox">Vox Sparkle</option>
+              <option value="facebook">Facebook</option>
+              <option value="dribbble">Dribbble</option>
+              <option value="instagram">Instagram</option>
+              <option value="airbnb">Airbnb</option>
+              <option value="pinterest">Pinterest</option>
+              <option value="figma">Figma</option>
+              <option value="google">Google</option>
+              <option value="meridia">Meridia</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-tasks-done">Số tác vụ đã hoàn thành</label>
+            <input type="number" id="project-tasks-done" min="0" required placeholder="12" value="0">
+          </div>
+          <div class="form-group">
+            <label for="project-tasks-total">Tổng số tác vụ</label>
+            <input type="number" id="project-tasks-total" min="1" required placeholder="24" value="10">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-budget">Ngân sách ($)</label>
+            <input type="number" id="project-budget" min="0" required placeholder="25000">
+          </div>
+          <div class="form-group">
+            <label for="project-due">Hạn chót</label>
+            <input type="date" id="project-due" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="modal-cancel-btn">Hủy bỏ</button>
+          <button type="submit" class="btn-primary">Tạo dự án</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD EMPLOYEE MODAL -->
+  <div class="modal-overlay" id="add-employee-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Thêm Nhân Viên Mới</h2>
+        <button class="modal-close" id="employee-modal-close-btn">&times;</button>
+      </div>
+      <form id="employee-form">
+        <div class="form-group">
+          <label for="emp-name">Họ và tên</label>
+          <input type="text" id="emp-name" required placeholder="e.g. Nguyễn Văn A">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emp-dept">Phòng ban</label>
+            <select id="emp-dept" required>
+              <option value="Tổng quan">Tổng quan</option>
+              <option value="Nhân sự (HR)">Nhân sự (HR)</option>
+              <option value="Truyền thông nội bộ">Truyền thông nội bộ</option>
+              <option value="Bán hàng">Bán hàng</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Phân tích dữ liệu">Phân tích dữ liệu</option>
+              <option value="Pháp lý - Tuân thủ">Pháp lý - Tuân thủ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="emp-role">Vai trò</label>
+            <input type="text" id="emp-role" required placeholder="e.g. Chuyên viên Tuyển dụng">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emp-email">Email</label>
+            <input type="email" id="emp-email" required placeholder="e.g. email@versa.vn">
+          </div>
+          <div class="form-group">
+            <label for="emp-status">Trạng thái</label>
+            <select id="emp-status" required>
+              <option value="Đang hoạt động">Đang hoạt động</option>
+              <option value="Nghỉ phép">Nghỉ phép</option>
+              <option value="Làm việc từ xa">Làm việc từ xa</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="employee-modal-cancel-btn">Hủy</button>
+          <button type="submit" class="btn-primary">Lưu nhân viên</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <!-- FLOATING RIGHT SIDE DRAWER (NOTIFICATIONS) -->
+  <button class="floating-drawer-btn right" id="right-drawer-trigger" aria-label="Open notifications panel" style="left: auto; right: 0; border-right: none; border-left: 1px solid var(--border-color); border-radius: 16px 0 0 16px;">
+    <i data-lucide="bell"></i>
+  </button>
+
+  <div class="drawer-overlay" id="right-drawer-overlay"></div>
+  <div class="drawer-panel right" id="right-drawer-panel" style="left: auto; right: 0; border-right: none; border-left: 1px solid var(--border-color); border-radius: 24px 0 0 24px; transform: translateX(100%);">
+    <div class="drawer-header">
+      <h2>Thông báo</h2>
+      <button class="drawer-close" id="right-drawer-close-btn">&times;</button>
+    </div>
+    <div class="drawer-content">
+      <ul class="notification-feed-list" style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+        <li style="background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.5); padding: 14px; border-radius: 10px; text-align: left;">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 6px;">
+            <span style="font-weight:700; font-size:0.85rem; color:var(--primary);">Dự án Vox</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">10 phút trước</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-main); line-height:1.4;">Dự án đã hoàn thành thêm 4 nhiệm vụ mới, nâng tiến độ lên 16/24.</p>
+        </li>
+        <li style="background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.5); padding: 14px; border-radius: 10px; text-align: left;">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 6px;">
+            <span style="font-weight:700; font-size:0.85rem; color:#10b981;">Nhân sự mới</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">30 phút trước</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-main); line-height:1.4;">Nhân sự <strong>Nguyễn Văn A</strong> đã được thêm vào phân hệ Quản trị điều hành.</p>
+        </li>
+        <li style="background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.5); padding: 14px; border-radius: 10px; text-align: left;">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 6px;">
+            <span style="font-weight:700; font-size:0.85rem; color:#f97316;">Sắp đến hạn</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">2 giờ trước</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-main); line-height:1.4;">Dự án <em>Facebook Ads Campaign</em> sắp đến hạn bàn giao vào ngày 30 Jan, 2025.</p>
+        </li>
+        <li style="background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.5); padding: 14px; border-radius: 10px; text-align: left;">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 6px;">
+            <span style="font-weight:700; font-size:0.85rem; color:var(--primary-dark);">Cập nhật hệ thống</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">1 ngày trước</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-main); line-height:1.4;">Website <strong>Power Service</strong> đã nâng cấp thành công giao diện kính mờ và đồng bộ bo góc 10px.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ADD GOAL MODAL -->
+  <div class="modal-overlay" id="add-goal-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Tạo Mục Tiêu Mới (OKR)</h2>
+        <button class="modal-close" id="goal-modal-close-btn">&times;</button>
+      </div>
+      <form id="goal-form">
+        <div class="form-group">
+          <label for="goal-name">Tên mục tiêu</label>
+          <input type="text" id="goal-name" required placeholder="e.g. Tăng trưởng doanh số bán lẻ">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="goal-dept">Phòng ban liên quan</label>
+            <select id="goal-dept" required>
+              <option value="Tổng quan">Tổng quan / Toàn công ty</option>
+              <option value="Quản lý dự án">Quản lý dự án</option>
+              <option value="Nhân sự (HR)">Nhân sự (HR)</option>
+              <option value="Truyền thông nội bộ">Truyền thông nội bộ</option>
+              <option value="Pháp lý - Tuân thủ">Pháp lý - Tuân thủ</option>
+              <option value="Bán hàng">Bán hàng</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Phân tích dữ liệu">Phân tích dữ liệu</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="goal-target">Chỉ tiêu (%)</label>
+            <input type="number" id="goal-target" min="1" max="100" required placeholder="100" value="100">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="goal-current">Tiến độ hiện tại (%)</label>
+            <input type="number" id="goal-current" min="0" max="100" required placeholder="0" value="0">
+          </div>
+          <div class="form-group">
+            <label for="goal-due">Hạn chót</label>
+            <input type="date" id="goal-due" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="goal-modal-cancel-btn">Hủy bỏ</button>
+          <button type="submit" class="btn-primary">Tạo mục tiêu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD TASK MODAL -->
+  <div class="modal-overlay" id="add-task-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Thêm Công Việc Mới</h2>
+        <button class="modal-close" id="task-modal-close-btn">&times;</button>
+      </div>
+      <form id="task-form">
+        <div class="form-group">
+          <label for="task-name">Tên công việc</label>
+          <input type="text" id="task-name" required placeholder="e.g. Thiết kế wireframe cho dự án">
+        </div>
+        <div class="form-group">
+          <label for="task-project">Dự án áp dụng</label>
+          <select id="task-project" required>
+            <!-- Dynamically populated from projects -->
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="task-assignee">Người thực hiện</label>
+            <select id="task-assignee" required>
+              <!-- Dynamically populated from employees -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task-priority">Độ ưu tiên</label>
+            <select id="task-priority" required>
+              <option value="low">Thấp</option>
+              <option value="medium" selected>Trung bình</option>
+              <option value="high">Cao</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="task-status">Trạng thái ban đầu</label>
+            <select id="task-status" required>
+              <option value="todo">Cần làm</option>
+              <option value="inprogress">Đang làm</option>
+              <option value="done">Hoàn thành</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task-due">Hạn chót</label>
+            <input type="date" id="task-due" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="task-modal-cancel-btn">Hủy bỏ</button>
+          <button type="submit" class="btn-primary">Tạo công việc</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
