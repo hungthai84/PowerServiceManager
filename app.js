@@ -569,6 +569,7 @@ const viewProjects = document.getElementById('view-projects');
 const viewHr = document.getElementById('view-hr');
 const viewTasks = document.getElementById('view-tasks');
 const viewProjectGoals = document.getElementById('view-project-goals');
+const viewBlog = document.getElementById('view-blog');
 const viewGeneric = document.getElementById('view-generic');
 const pageTitle = document.querySelector('.page-title');
 
@@ -581,6 +582,7 @@ function switchView(viewName, meta = {}) {
   viewGeneric.style.display = 'none';
   if (viewTasks) viewTasks.style.display = 'none';
   if (viewProjectGoals) viewProjectGoals.style.display = 'none';
+  if (viewBlog) viewBlog.style.display = 'none';
 
   if (viewName === 'overview') {
     viewOverview.style.display = 'block';
@@ -599,6 +601,9 @@ function switchView(viewName, meta = {}) {
   } else if (viewName === 'project-goals') {
     if (viewProjectGoals) viewProjectGoals.style.display = 'block';
     renderProjectGoals();
+  } else if (viewName === 'blog') {
+    if (viewBlog) viewBlog.style.display = 'block';
+    renderBlog();
   } else if (viewName === 'generic') {
     viewGeneric.style.display = 'block';
     document.getElementById('generic-title').textContent = meta.label || 'Tính năng';
@@ -1136,3 +1141,561 @@ document.addEventListener('click', (e) => {
     document.querySelectorAll('.nav-parent-group').forEach(g => g.classList.remove('open'));
   }
 });
+
+// ==========================================
+// BLOG / BULLETIN BOARD (DUAL VIEW) STATE & LOGIC
+// ==========================================
+
+// State variables
+let blogViewMode = 'grid'; // grid | table
+let blogCategoryFilter = 'All';
+let blogSearchQuery = '';
+let activeReadingPost = null;
+
+// Blog Posts Mock Data
+let posts = [
+  {
+    id: 1,
+    title: 'Thông báo nâng cấp hệ thống Power Service v2.5',
+    category: 'Thông báo',
+    summary: 'Hệ thống Power Service sẽ được nâng cấp giao diện kính mờ và đồng bộ bo góc 10px để tối ưu hóa trải nghiệm người dùng vào cuối tuần này.',
+    content: 'Kính gửi toàn thể cán bộ nhân viên,\n\nĐể cải thiện chất lượng dịch vụ và tối ưu hóa hiệu suất làm việc, bộ phận phát triển sẽ tiến hành nâng cấp hệ thống Power Service lên phiên bản 2.5.\n\nThời gian thực hiện nâng cấp: từ 22:00 ngày thứ Bảy (27/06/2026) đến 04:00 ngày Chủ Nhật (28/06/2026).\n\nTrong thời gian này, hệ thống có thể tạm thời không truy cập được. Mong các phòng ban lưu ý để sắp xếp công việc hợp lý.\n\nTrân trọng,\nBan Quản trị Hệ thống.',
+    coverImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800',
+    date: '2026-06-25',
+    author: 'Nguyễn Văn A',
+    likes: 12,
+    status: 'Đã xuất bản',
+    comments: [
+      { author: 'Trần Thị B', text: 'Tuyệt vời! Giao diện mới nhìn rất đẹp và hiện đại.', date: '2026-06-25T10:30:00Z' },
+      { author: 'Phạm Văn C', text: 'Thời gian nâng cấp vào ban đêm rất hợp lý, cảm ơn đội IT.', date: '2026-06-25T11:15:00Z' }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Chào mừng thành viên mới gia nhập phòng HR',
+    category: 'Tin tức',
+    summary: 'Chào đón chị Lê Thị D gia nhập versa với vai trò Chuyên viên Tuyển dụng và Đào tạo từ ngày 25/06/2026.',
+    content: 'Chúng ta cùng chào đón chị Lê Thị D chính thức gia nhập phòng Nhân sự (HR) của đại gia đình versa.\n\nVới hơn 5 năm kinh nghiệm trong lĩnh vực quản trị nhân sự và tuyển dụng tại các tập đoàn lớn, chị D được kỳ vọng sẽ đóng góp đắc lực vào việc thu hút tài năng và xây dựng đội ngũ nhân sự vững mạnh cho versa trong thời gian tới.\n\nMọi người hãy cùng gửi lời chúc mừng và hỗ trợ chị D nhanh chóng làm quen với môi trường mới nhé!\n\nChúc chị D luôn nhiều năng lượng và thành công rực rỡ cùng versa.',
+    coverImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
+    date: '2026-06-25',
+    author: 'Trần Thị B',
+    likes: 8,
+    status: 'Đã xuất bản',
+    comments: [
+      { author: 'Lê Thị D', text: 'Cảm ơn mọi người đã đón tiếp nồng hậu ạ! Rất vui được đồng hành cùng cả nhà.', date: '2026-06-25T09:00:00Z' },
+      { author: 'Nguyễn Văn A', text: 'Chào mừng em gia nhập versa. Chúc em gặt hái nhiều thành công!', date: '2026-06-25T09:45:00Z' }
+    ]
+  },
+  {
+    id: 3,
+    title: '5 Bí quyết cân bằng giữa Công việc và Cuộc sống',
+    category: 'Văn hóa',
+    summary: 'Chia sẻ các thói quen nhỏ giúp duy trì sức khỏe tinh thần và năng suất làm việc cao cho nhân viên văn phòng.',
+    content: 'Trong môi trường làm việc năng động, việc duy trì sự cân bằng giữa công việc và đời sống cá nhân là chìa khóa để giữ vững ngọn lửa nhiệt huyết. Dưới đây là 5 bí quyết nhỏ giúp bạn đạt được điều đó:\n\n1. Xác định ranh giới rõ ràng: Tắt thông báo công việc sau giờ làm.\n2. Lập kế hoạch công việc khoa học: Sử dụng Kanban Board trong Power Service để sắp xếp độ ưu tiên.\n3. Dành thời gian cho bản thân: Tập thể dục nhẹ hoặc đọc sách 30 phút mỗi ngày.\n4. Học cách từ chối: Đừng nhận quá nhiều việc ngoài tầm kiểm soát.\n5. Chia sẻ và kết nối: Tham gia các hoạt động team building cùng đồng nghiệp.\n\nHãy bắt đầu từ những thay đổi nhỏ nhất ngay hôm nay!',
+    coverImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800',
+    date: '2026-06-24',
+    author: 'Lê Thị D',
+    likes: 15,
+    status: 'Đã xuất bản',
+    comments: [
+      { author: 'Phạm Văn C', text: 'Bài viết rất hữu ích. Tính năng Kanban của app giúp mình quản lý task tốt hơn nhiều.', date: '2026-06-24T14:20:00Z' }
+    ]
+  }
+];
+
+// Main Render blog coordinator
+function renderBlog() {
+  const gridContainer = document.getElementById('blog-grid');
+  const tableContainer = document.getElementById('blog-table-container');
+  if (!gridContainer || !tableContainer) return;
+
+  // Filter posts based on category and search query
+  let filteredPosts = posts.filter(post => {
+    const matchesCategory = blogCategoryFilter === 'All' || post.category === blogCategoryFilter;
+    const matchesSearch = post.title.toLowerCase().includes(blogSearchQuery.toLowerCase()) || 
+                          post.content.toLowerCase().includes(blogSearchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  if (blogViewMode === 'grid') {
+    gridContainer.style.display = 'grid';
+    tableContainer.style.display = 'none';
+    renderBlogGrid(filteredPosts);
+  } else {
+    gridContainer.style.display = 'none';
+    tableContainer.style.display = 'block';
+    renderBlogTable(filteredPosts);
+  }
+}
+
+// Render Blog Cards (Grid View)
+function renderBlogGrid(filteredPosts) {
+  const container = document.getElementById('blog-grid');
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (filteredPosts.length === 0) {
+    container.innerHTML = `
+      <div class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+        <p>Không tìm thấy bài viết nào phù hợp.</p>
+      </div>
+    `;
+    return;
+  }
+
+  filteredPosts.forEach(post => {
+    const commentsCount = post.comments ? post.comments.length : 0;
+    const authorEmp = employees.find(e => e.name === post.author) || employees[0];
+    const categoryClass = post.category === 'Thông báo' ? 'thong-bao' :
+                          post.category === 'Tin tức' ? 'tin-tuc' :
+                          post.category === 'Văn hóa' ? 'van-hoa' : 'huong-dan';
+
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.setAttribute('data-id', post.id);
+    card.innerHTML = `
+      <div class="blog-card-cover">
+        <img src="${post.coverImage}" alt="${post.title}" loading="lazy">
+      </div>
+      <div class="blog-card-content">
+        <div class="blog-card-header">
+          <span class="category-tag ${categoryClass}">${post.category}</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">${formatDate(post.date)}</span>
+        </div>
+        <h3 class="blog-card-title">${post.title}</h3>
+        <p class="blog-card-summary">${post.summary}</p>
+        <div class="blog-card-footer">
+          <div class="blog-card-author">
+            <img src="${authorEmp.avatar}" alt="${post.author}">
+            <span class="blog-card-author-name">${post.author}</span>
+          </div>
+          <div class="blog-card-stats">
+            <span><i data-lucide="heart" style="width: 13px; height: 13px; fill: currentColor; color: #ef4444;"></i> ${post.likes}</span>
+            <span><i data-lucide="message-square" style="width: 13px; height: 13px;"></i> ${commentsCount}</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => {
+      openReadPostModal(post.id);
+    });
+
+    container.appendChild(card);
+  });
+
+  lucide.createIcons();
+}
+
+// Render Blog Table (Spreadsheet View with Inline Editing)
+function renderBlogTable(filteredPosts) {
+  const tbody = document.getElementById('blog-list-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+
+  if (filteredPosts.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" style="text-align: center; padding: 40px; color: var(--text-muted);">
+          Không tìm thấy bài viết nào phù hợp.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  filteredPosts.forEach(post => {
+    const commentsCount = post.comments ? post.comments.length : 0;
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-id', post.id);
+
+    tr.innerHTML = `
+      <td>
+        <div class="spreadsheet-editable-cell" data-field="title" title="Nhấp đúp để sửa tiêu đề">${post.title}</div>
+      </td>
+      <td>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-weight:600;">${post.author}</span>
+        </div>
+      </td>
+      <td>
+        <select class="spreadsheet-select" data-field="category">
+          <option value="Thông báo" ${post.category === 'Thông báo' ? 'selected' : ''}>Thông báo</option>
+          <option value="Tin tức" ${post.category === 'Tin tức' ? 'selected' : ''}>Tin tức</option>
+          <option value="Văn hóa" ${post.category === 'Văn hóa' ? 'selected' : ''}>Văn hóa</option>
+          <option value="Hướng dẫn" ${post.category === 'Hướng dẫn' ? 'selected' : ''}>Hướng dẫn</option>
+        </select>
+      </td>
+      <td>${formatDate(post.date)}</td>
+      <td style="font-weight: 700; color: #ef4444;">${post.likes}</td>
+      <td style="font-weight: 700; color: var(--primary);">${commentsCount}</td>
+      <td>
+        <select class="spreadsheet-select" data-field="status">
+          <option value="Đã xuất bản" ${post.status === 'Đã xuất bản' ? 'selected' : ''}>Đã xuất bản</option>
+          <option value="Nháp" ${post.status === 'Nháp' ? 'selected' : ''}>Bản nháp</option>
+        </select>
+      </td>
+      <td>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button class="btn-primary" style="padding: 4px 8px; font-size: 0.75rem; background: var(--primary);" onclick="openReadPostModal(${post.id})" title="Xem chi tiết">
+            <i data-lucide="eye" style="width:14px; height:14px;"></i>
+          </button>
+          <button class="btn-icon-danger" style="padding: 4px;" onclick="deletePost(${post.id})" title="Xóa bài viết">
+            <i data-lucide="trash-2" style="width:14px; height:14px;"></i>
+          </button>
+        </div>
+      </td>
+    `;
+
+    // Inline Editing for title on double click
+    const titleCell = tr.querySelector('.spreadsheet-editable-cell[data-field="title"]');
+    titleCell.addEventListener('dblclick', () => {
+      const currentVal = titleCell.textContent;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'spreadsheet-input';
+      input.value = currentVal;
+      titleCell.innerHTML = '';
+      titleCell.appendChild(input);
+      input.focus();
+
+      const saveEdit = () => {
+        const newVal = input.value.trim();
+        if (newVal && newVal !== currentVal) {
+          post.title = newVal;
+        }
+        titleCell.innerHTML = post.title;
+      };
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          saveEdit();
+        } else if (e.key === 'Escape') {
+          titleCell.innerHTML = currentVal;
+        }
+      });
+
+      input.addEventListener('blur', saveEdit);
+    });
+
+    // Inline select change for category
+    const categorySelect = tr.querySelector('select[data-field="category"]');
+    categorySelect.addEventListener('change', (e) => {
+      post.category = e.target.value;
+      renderBlog();
+    });
+
+    // Inline select change for status
+    const statusSelect = tr.querySelector('select[data-field="status"]');
+    statusSelect.addEventListener('change', (e) => {
+      post.status = e.target.value;
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  lucide.createIcons();
+}
+
+// Delete Blog Post
+window.deletePost = function(id) {
+  if (confirm('Bạn có chắc chắn muốn xóa bài viết này không?')) {
+    posts = posts.filter(post => post.id !== id);
+    renderBlog();
+  }
+}
+
+// Open Post Modal (Reading Mode)
+window.openReadPostModal = function(postId) {
+  const post = posts.find(p => p.id === postId);
+  if (!post) return;
+  activeReadingPost = post;
+
+  const modal = document.getElementById('view-post-modal');
+  if (!modal) return;
+
+  const categoryEl = document.getElementById('read-post-category');
+  const coverEl = document.getElementById('read-post-cover');
+  const titleEl = document.getElementById('read-post-title');
+  const authorAvatarEl = document.getElementById('read-post-author-avatar');
+  const authorNameEl = document.getElementById('read-post-author');
+  const dateEl = document.getElementById('read-post-date');
+  const likesEl = document.getElementById('read-post-likes');
+  const contentEl = document.getElementById('read-post-content');
+  const commentsCountEl = document.getElementById('read-post-comments-count');
+  
+  const categoryClass = post.category === 'Thông báo' ? 'thong-bao' :
+                        post.category === 'Tin tức' ? 'tin-tuc' :
+                        post.category === 'Văn hóa' ? 'van-hoa' : 'huong-dan';
+
+  if (categoryEl) {
+    categoryEl.textContent = post.category;
+    categoryEl.className = `category-tag ${categoryClass}`;
+  }
+  if (coverEl) coverEl.src = post.coverImage;
+  if (titleEl) titleEl.textContent = post.title;
+  
+  const authorEmp = employees.find(e => e.name === post.author) || employees[0];
+  if (authorAvatarEl) authorAvatarEl.src = authorEmp.avatar;
+  if (authorNameEl) authorNameEl.textContent = post.author;
+  if (dateEl) dateEl.textContent = formatDate(post.date);
+  if (likesEl) likesEl.textContent = post.likes;
+  if (contentEl) contentEl.textContent = post.content;
+  if (commentsCountEl) commentsCountEl.textContent = post.comments ? post.comments.length : 0;
+
+  // Render comments list
+  renderComments();
+
+  // Populate comment author list
+  populateCommentAuthorDropdown();
+
+  modal.classList.add('active');
+  lucide.createIcons();
+}
+
+// Render comments in reader
+function renderComments() {
+  const container = document.getElementById('comments-list');
+  if (!container || !activeReadingPost) return;
+  container.innerHTML = '';
+
+  const comments = activeReadingPost.comments || [];
+  if (comments.length === 0) {
+    container.innerHTML = `<p style="color:var(--text-muted); font-size:0.85rem; padding: 10px 0;">Chưa có bình luận nào. Hãy là người đầu tiên bình luận!</p>`;
+    return;
+  }
+
+  comments.forEach(comment => {
+    const emp = employees.find(e => e.name === comment.author) || employees[0];
+    const commentItem = document.createElement('div');
+    commentItem.className = 'comment-item';
+    commentItem.innerHTML = `
+      <img src="${emp.avatar}" alt="${comment.author}" class="comment-avatar">
+      <div class="comment-info">
+        <div class="comment-author-row">
+          <span class="comment-author">${comment.author}</span>
+          <span class="comment-time">${comment.date ? formatCommentDate(comment.date) : ''}</span>
+        </div>
+        <p class="comment-text">${comment.text}</p>
+      </div>
+    `;
+    container.appendChild(commentItem);
+  });
+}
+
+// Helper to format comment time relative/absolute
+function formatCommentDate(dateStr) {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const diffMs = now - date;
+  const diffMin = Math.floor(diffMs / 60000);
+  
+  if (diffMin < 1) return 'Vừa xong';
+  if (diffMin < 60) return `${diffMin} phút trước`;
+  
+  const diffHours = Math.floor(diffMin / 60);
+  if (diffHours < 24) return `${diffHours} giờ trước`;
+  
+  return formatDate(dateStr);
+}
+
+// Populate Comment author selection dropdown
+function populateCommentAuthorDropdown() {
+  const select = document.getElementById('comment-author-select');
+  if (!select) return;
+  select.innerHTML = '';
+  employees.forEach(emp => {
+    const opt = document.createElement('option');
+    opt.value = emp.name;
+    opt.textContent = emp.name;
+    select.appendChild(opt);
+  });
+}
+
+// Attach Like event
+const likePostBtn = document.getElementById('like-post-btn');
+if (likePostBtn) {
+  likePostBtn.addEventListener('click', () => {
+    if (activeReadingPost) {
+      activeReadingPost.likes += 1;
+      const likesEl = document.getElementById('read-post-likes');
+      if (likesEl) likesEl.textContent = activeReadingPost.likes;
+      renderBlog();
+    }
+  });
+}
+
+// Attach Comment submit event
+const submitCommentBtn = document.getElementById('submit-comment-btn');
+if (submitCommentBtn) {
+  submitCommentBtn.addEventListener('click', () => {
+    const textEl = document.getElementById('new-comment-text');
+    const authorEl = document.getElementById('comment-author-select');
+    if (!textEl || !authorEl || !activeReadingPost) return;
+
+    const text = textEl.value.trim();
+    const author = authorEl.value;
+
+    if (!text) return;
+
+    const newComment = {
+      author: author,
+      text: text,
+      date: new Date().toISOString()
+    };
+
+    if (!activeReadingPost.comments) activeReadingPost.comments = [];
+    activeReadingPost.comments.push(newComment);
+    textEl.value = '';
+
+    renderComments();
+    const countEl = document.getElementById('read-post-comments-count');
+    if (countEl) countEl.textContent = activeReadingPost.comments.length;
+    renderBlog();
+  });
+}
+
+// Close Reader Modal event
+const viewPostCloseBtn = document.getElementById('view-post-close-btn');
+if (viewPostCloseBtn) {
+  viewPostCloseBtn.addEventListener('click', () => {
+    document.getElementById('view-post-modal').classList.remove('active');
+    activeReadingPost = null;
+  });
+}
+
+// Write Post Modal actions
+const writePostBtn = document.getElementById('write-post-btn');
+const addPostModal = document.getElementById('add-post-modal');
+const postModalClose = document.getElementById('post-modal-close-btn');
+const postModalCancel = document.getElementById('post-modal-cancel-btn');
+const postForm = document.getElementById('post-form');
+
+if (writePostBtn && addPostModal) {
+  writePostBtn.addEventListener('click', () => {
+    // Populate author select
+    const authorSelect = document.getElementById('post-author');
+    if (authorSelect) {
+      authorSelect.innerHTML = '';
+      employees.forEach(emp => {
+        const opt = document.createElement('option');
+        opt.value = emp.name;
+        opt.textContent = emp.name;
+        authorSelect.appendChild(opt);
+      });
+    }
+    addPostModal.classList.add('active');
+  });
+}
+
+function closePostModal() {
+  if (addPostModal) {
+    addPostModal.classList.remove('active');
+    postForm.reset();
+    const customGroup = document.getElementById('post-custom-cover-group');
+    if (customGroup) customGroup.style.display = 'none';
+  }
+}
+
+if (postModalClose) postModalClose.addEventListener('click', closePostModal);
+if (postModalCancel) postModalCancel.addEventListener('click', closePostModal);
+
+// Toggle custom cover input
+const postCoverSelect = document.getElementById('post-cover-select');
+if (postCoverSelect) {
+  postCoverSelect.addEventListener('change', (e) => {
+    const customGroup = document.getElementById('post-custom-cover-group');
+    if (customGroup) {
+      if (e.target.value === 'custom') {
+        customGroup.style.display = 'block';
+        const customInput = document.getElementById('post-custom-cover');
+        if (customInput) customInput.required = true;
+      } else {
+        customGroup.style.display = 'none';
+        const customInput = document.getElementById('post-custom-cover');
+        if (customInput) customInput.required = false;
+      }
+    }
+  });
+}
+
+// Add post Form Submit
+if (postForm) {
+  postForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('post-title').value;
+    const category = document.getElementById('post-category').value;
+    const author = document.getElementById('post-author').value;
+    const coverType = document.getElementById('post-cover-select').value;
+    const summary = document.getElementById('post-summary').value;
+    const content = document.getElementById('post-content').value;
+
+    let coverImage = '';
+    if (coverType === 'tech') {
+      coverImage = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800';
+    } else if (coverType === 'office') {
+      coverImage = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800';
+    } else if (coverType === 'team') {
+      coverImage = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800';
+    } else {
+      coverImage = document.getElementById('post-custom-cover').value || 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800';
+    }
+
+    const newPost = {
+      id: Date.now(),
+      title,
+      category,
+      author,
+      summary,
+      content,
+      coverImage,
+      date: new Date().toISOString().split('T')[0],
+      likes: 0,
+      status: 'Đã xuất bản',
+      comments: []
+    };
+
+    posts.unshift(newPost);
+    renderBlog();
+    closePostModal();
+  });
+}
+
+// Toggle grid / table views
+const blogGridViewBtn = document.getElementById('blog-grid-view-btn');
+const blogTableViewBtn = document.getElementById('blog-table-view-btn');
+
+if (blogGridViewBtn && blogTableViewBtn) {
+  blogGridViewBtn.addEventListener('click', () => {
+    blogViewMode = 'grid';
+    blogGridViewBtn.classList.add('active');
+    blogTableViewBtn.classList.remove('active');
+    renderBlog();
+  });
+
+  blogTableViewBtn.addEventListener('click', () => {
+    blogViewMode = 'table';
+    blogTableViewBtn.classList.add('active');
+    blogGridViewBtn.classList.remove('active');
+    renderBlog();
+  });
+}
+
+// Attach filter change and search input listeners
+const blogCategoryFilterEl = document.getElementById('blog-category-filter');
+const blogSearchInputEl = document.getElementById('blog-search-input');
+
+if (blogCategoryFilterEl) {
+  blogCategoryFilterEl.addEventListener('change', (e) => {
+    blogCategoryFilter = e.target.value;
+    renderBlog();
+  });
+}
+
+if (blogSearchInputEl) {
+  blogSearchInputEl.addEventListener('input', (e) => {
+    blogSearchQuery = e.target.value;
+    renderBlog();
+  });
+}
+

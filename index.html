@@ -77,7 +77,7 @@
               <i data-lucide="chevron-right" class="chevron-icon"></i>
             </button>
             <ul class="nav-child-list">
-              <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Truyền thông nội bộ" data-idx="0" data-label="Bảng tin" data-desc="Bảng tin chia sẻ thông điệp, văn hóa doanh nghiệp và tin tức nội bộ." data-icon="megaphone">Bảng tin</a></li>
+              <li><a href="#" class="nav-child-item" data-view="blog" data-dept="Truyền thông nội bộ" data-idx="0">Bảng tin</a></li>
               <li><a href="#" class="nav-child-item" data-view="generic" data-dept="Truyền thông nội bộ" data-idx="1" data-label="Sự kiện" data-desc="Lập kế hoạch tổ chức sự kiện, ngày hội gia đình và hoạt động team building." data-icon="calendar">Sự kiện</a></li>
             </ul>
           </div>
@@ -530,6 +530,76 @@
         </div>
       </div>
 
+      <!-- BLOG / BULLETIN BOARD VIEW CONTAINER -->
+      <div id="view-blog" class="view-container" style="display: none;">
+        <!-- FILTER & ACTION BAR -->
+        <section class="controls-bar" style="margin-bottom: 24px;">
+          <div class="filters">
+            <div class="filter-group">
+              <label for="blog-category-filter">Chuyên mục</label>
+              <div class="select-wrapper">
+                <select id="blog-category-filter">
+                  <option value="All">Tất cả</option>
+                  <option value="Thông báo">Thông báo</option>
+                  <option value="Tin tức">Tin tức</option>
+                  <option value="Văn hóa">Văn hóa</option>
+                  <option value="Hướng dẫn">Hướng dẫn</option>
+                </select>
+                <i data-lucide="chevron-down"></i>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label for="blog-search-input">Tìm kiếm</label>
+              <div class="search-bar">
+                <i data-lucide="search"></i>
+                <input type="text" id="blog-search-input" placeholder="Tìm tiêu đề hoặc nội dung...">
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <div class="view-toggles">
+              <button class="view-btn active" id="blog-grid-view-btn" title="Dạng Lưới (Blog)">
+                <i data-lucide="layout-grid"></i>
+              </button>
+              <button class="view-btn" id="blog-table-view-btn" title="Dạng Bảng (Bảng tính)">
+                <i data-lucide="table"></i>
+              </button>
+            </div>
+            <button class="btn-primary" id="write-post-btn">
+              <i data-lucide="pen-tool"></i> Viết bài mới
+            </button>
+          </div>
+        </section>
+
+        <!-- BLOG GRID VIEWPORT (CARDS) -->
+        <div class="blog-grid-container" id="blog-grid">
+          <!-- Rendered dynamically via JS -->
+        </div>
+
+        <!-- BLOG SPREADSHEET TABLE VIEWPORT (TABLE) -->
+        <div class="employee-table-wrapper blog-table-view" id="blog-table-container" style="display: none;">
+          <table class="blog-table">
+            <thead>
+              <tr>
+                <th style="width: 40%;">Tiêu đề (Nhấp đúp để sửa)</th>
+                <th style="width: 15%;">Tác giả</th>
+                <th style="width: 15%;">Chuyên mục</th>
+                <th style="width: 10%;">Ngày đăng</th>
+                <th style="width: 5%;">Thích</th>
+                <th style="width: 5%;">Bình luận</th>
+                <th style="width: 10%;">Trạng thái</th>
+                <th style="width: 5%;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="blog-list-tbody">
+              <!-- Rendered dynamically via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- GENERIC WORKSPACE VIEW CONTAINER -->
       <div id="view-generic" class="view-container" style="display: none; padding: 40px; text-align: center;">
         <div class="generic-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 60px 40px; box-shadow: var(--card-shadow); max-width: 500px; margin: 40px auto; display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -806,6 +876,123 @@
         <div class="modal-footer">
           <button type="button" class="btn-secondary" id="task-modal-cancel-btn">Hủy bỏ</button>
           <button type="submit" class="btn-primary">Tạo công việc</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- VIEW POST MODAL (READING MODE) -->
+  <div class="modal-overlay" id="view-post-modal">
+    <div class="modal-card" style="max-width: 800px; width: 90%;">
+      <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+        <span id="read-post-category" class="category-tag" style="margin-right: auto;"></span>
+        <button class="modal-close" id="view-post-close-btn">&times;</button>
+      </div>
+      <div class="modal-body-scroll" style="max-height: 70vh; overflow-y: auto; padding: 0 24px 24px 24px;">
+        <div id="read-post-cover-wrapper" style="width: 100%; height: 280px; border-radius: 10px; overflow: hidden; margin-bottom: 20px; position: relative;">
+          <img id="read-post-cover" src="" alt="Cover Image" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <h1 id="read-post-title" style="font-size: 1.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px; line-height: 1.3;"></h1>
+        
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img id="read-post-author-avatar" src="" alt="Author" style="width: 36px; height: 36px; border-radius: 50%;">
+            <div style="display: flex; flex-direction: column; text-align: left;">
+              <span id="read-post-author" style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);"></span>
+              <span id="read-post-date" style="font-size: 0.75rem; color: var(--text-muted);"></span>
+            </div>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <button id="like-post-btn" class="btn-secondary" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px;">
+              <i data-lucide="heart" style="width: 16px; height: 16px;"></i>
+              <span id="read-post-likes">0</span> Thích
+            </button>
+          </div>
+        </div>
+
+        <div id="read-post-content" style="font-size: 1rem; color: var(--text-main); line-height: 1.7; text-align: left; margin-bottom: 30px; white-space: pre-wrap;">
+        </div>
+
+        <!-- COMMENTS SECTION -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: 24px; text-align: left;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="message-square" style="color: var(--primary);"></i> Bình luận (<span id="read-post-comments-count">0</span>)
+          </h3>
+          
+          <div id="comments-list" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Add comment form -->
+          <div style="display: flex; gap: 10px; align-items: flex-start; background: rgba(255,255,255,0.4); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color);">
+            <div style="display: flex; flex-direction: column; flex-grow: 1; gap: 8px;">
+              <label for="comment-author-select" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Bình luận với tư cách:</label>
+              <select id="comment-author-select" style="padding: 6px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit; font-size: 0.85rem; background: var(--card-bg);">
+                <!-- Dynamically populated from employees -->
+              </select>
+              <textarea id="new-comment-text" placeholder="Viết bình luận của bạn..." rows="2" style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); font-family: inherit; font-size: 0.9rem; width: 100%; resize: none; background: var(--card-bg);"></textarea>
+            </div>
+            <button id="submit-comment-btn" class="btn-primary" style="align-self: flex-end; padding: 8px 16px; font-size: 0.85rem;">Gửi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD POST MODAL -->
+  <div class="modal-overlay" id="add-post-modal">
+    <div class="modal-card" style="max-width: 650px; width: 90%;">
+      <div class="modal-header">
+        <h2>Viết Bài Mới</h2>
+        <button class="modal-close" id="post-modal-close-btn">&times;</button>
+      </div>
+      <form id="post-form">
+        <div class="form-group">
+          <label for="post-title">Tiêu đề bài viết</label>
+          <input type="text" id="post-title" required placeholder="e.g. Thông báo nghỉ lễ và lịch làm việc bù">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="post-category">Chuyên mục</label>
+            <select id="post-category" required>
+              <option value="Thông báo">Thông báo</option>
+              <option value="Tin tức">Tin tức</option>
+              <option value="Văn hóa">Văn hóa</option>
+              <option value="Hướng dẫn">Hướng dẫn</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="post-author">Người đăng</label>
+            <select id="post-author" required>
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="post-cover-select">Chọn ảnh bìa mẫu</label>
+          <select id="post-cover-select">
+            <option value="tech">Công nghệ & Kỹ thuật (Unsplash Tech)</option>
+            <option value="office">Môi trường Văn phòng (Unsplash Office)</option>
+            <option value="team">Team building & Sự kiện (Unsplash Team)</option>
+            <option value="custom">Đường dẫn ảnh tự chọn (URL)</option>
+          </select>
+        </div>
+        <div class="form-group" id="post-custom-cover-group" style="display: none;">
+          <label for="post-custom-cover">URL ảnh bìa tự chọn</label>
+          <input type="url" id="post-custom-cover" placeholder="https://images.unsplash.com/... hoặc link ảnh bất kỳ">
+        </div>
+        <div class="form-group">
+          <label for="post-summary">Tóm tắt ngắn</label>
+          <input type="text" id="post-summary" required placeholder="Tóm tắt ngắn gọn nội dung bài viết hiển thị ở danh sách...">
+        </div>
+        <div class="form-group">
+          <label for="post-content">Nội dung bài viết</label>
+          <textarea id="post-content" required rows="6" placeholder="Nhập nội dung chi tiết bài viết ở đây..." style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px; font-family: inherit; font-size: 0.9rem; resize: vertical; background: var(--card-bg);"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="post-modal-cancel-btn">Hủy bỏ</button>
+          <button type="submit" class="btn-primary">Lưu bài viết</button>
         </div>
       </form>
     </div>

@@ -1862,3 +1862,310 @@ body {
   border-radius: 50%;
 }
 
+/* ==========================================
+   BLOG / BULLETIN BOARD (DUAL VIEW) STYLES
+   ========================================== */
+
+/* Blog Grid Viewport */
+.blog-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.blog-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  background: var(--card-hover-bg);
+  box-shadow: 0 12px 30px rgba(31, 38, 135, 0.1);
+}
+
+.blog-card-cover {
+  height: 180px;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+.blog-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-card-cover img {
+  transform: scale(1.05);
+}
+
+.blog-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.blog-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.blog-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-summary {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 18px;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 14px;
+  margin-top: auto;
+}
+
+.blog-card-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blog-card-author img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.blog-card-author-name {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-main);
+}
+
+.blog-card-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.blog-card-stats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Category Badges Styling */
+.category-tag.thong-bao {
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--primary);
+}
+
+.category-tag.tin-tuc {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.category-tag.van-hoa {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.category-tag.huong-dan {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+}
+
+/* Spreadsheet Table Styling */
+.blog-table-view {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px !important;
+  box-shadow: var(--card-shadow);
+  overflow-x: auto;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.blog-table th, .blog-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.88rem;
+  vertical-align: middle;
+}
+
+.blog-table th {
+  background: rgba(255, 255, 255, 0.4);
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.blog-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.blog-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Spreadsheet Editable Fields */
+.spreadsheet-editable-cell {
+  position: relative;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.spreadsheet-editable-cell:hover {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.spreadsheet-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 2px solid var(--primary);
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+  outline: none;
+}
+
+.spreadsheet-select {
+  padding: 4px 8px;
+  border-radius: 6px !important;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.spreadsheet-select:focus {
+  border-color: var(--primary);
+}
+
+/* Comment Box item style */
+.comment-item {
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  padding: 12px;
+  border-radius: 10px !important;
+  align-items: flex-start;
+}
+
+.comment-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.comment-author-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.comment-author {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--text-main);
+}
+
+.comment-time {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.comment-text {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+/* Modal Body Scroll */
+.modal-body-scroll {
+  scrollbar-width: thin;
+}
+
+.modal-body-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+
