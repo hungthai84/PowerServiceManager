@@ -1158,6 +1158,7 @@ let posts = [
     id: 1,
     title: 'Thông báo nâng cấp hệ thống Power Service v2.5',
     category: 'Thông báo',
+    type: 'announcement',
     summary: 'Hệ thống Power Service sẽ được nâng cấp giao diện kính mờ và đồng bộ bo góc 10px để tối ưu hóa trải nghiệm người dùng vào cuối tuần này.',
     content: 'Kính gửi toàn thể cán bộ nhân viên,\n\nĐể cải thiện chất lượng dịch vụ và tối ưu hóa hiệu suất làm việc, bộ phận phát triển sẽ tiến hành nâng cấp hệ thống Power Service lên phiên bản 2.5.\n\nThời gian thực hiện nâng cấp: từ 22:00 ngày thứ Bảy (27/06/2026) đến 04:00 ngày Chủ Nhật (28/06/2026).\n\nTrong thời gian này, hệ thống có thể tạm thời không truy cập được. Mong các phòng ban lưu ý để sắp xếp công việc hợp lý.\n\nTrân trọng,\nBan Quản trị Hệ thống.',
     coverImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800',
@@ -1172,34 +1173,109 @@ let posts = [
   },
   {
     id: 2,
-    title: 'Chào mừng thành viên mới gia nhập phòng HR',
+    title: 'Workshop AI in Work - Ứng dụng AI nâng cao hiệu suất',
     category: 'Tin tức',
-    summary: 'Chào đón chị Lê Thị D gia nhập versa với vai trò Chuyên viên Tuyển dụng và Đào tạo từ ngày 25/06/2026.',
-    content: 'Chúng ta cùng chào đón chị Lê Thị D chính thức gia nhập phòng Nhân sự (HR) của đại gia đình versa.\n\nVới hơn 5 năm kinh nghiệm trong lĩnh vực quản trị nhân sự và tuyển dụng tại các tập đoàn lớn, chị D được kỳ vọng sẽ đóng góp đắc lực vào việc thu hút tài năng và xây dựng đội ngũ nhân sự vững mạnh cho versa trong thời gian tới.\n\nMọi người hãy cùng gửi lời chúc mừng và hỗ trợ chị D nhanh chóng làm quen với môi trường mới nhé!\n\nChúc chị D luôn nhiều năng lượng và thành công rực rỡ cùng versa.',
-    coverImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
+    type: 'event',
+    summary: 'Sự kiện chia sẻ thực tế về việc áp dụng các công cụ Generative AI vào công việc lập kế hoạch và quản trị hàng ngày.',
+    content: 'Kính gửi các anh chị em,\n\nNhằm giúp mọi người nắm bắt các xu hướng công nghệ mới nhất và nâng cao năng suất lao động, công ty tổ chức buổi Workshop chuyên sâu về ứng dụng Trí tuệ nhân tạo (AI).\n\nNội dung chính:\n- Giới thiệu các mô hình ngôn ngữ lớn (LLM) hỗ trợ viết code, tạo văn bản.\n- Cách viết Prompt chuẩn để giải quyết công việc hàng ngày.\n- Demo thực tế tích hợp AI vào quy trình dịch vụ khách hàng.\n\nRất mong mọi người đăng ký tham gia đông đủ!',
+    coverImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800',
     date: '2026-06-25',
-    author: 'Trần Thị B',
-    likes: 8,
+    author: 'Phạm Văn C',
+    likes: 21,
     status: 'Đã xuất bản',
+    eventDate: '2026-07-10',
+    eventTime: '14:00',
+    eventLocation: 'Phòng hội trường lớn Tầng 5',
+    rsvpCount: 8,
+    userRsvped: false,
     comments: [
-      { author: 'Lê Thị D', text: 'Cảm ơn mọi người đã đón tiếp nồng hậu ạ! Rất vui được đồng hành cùng cả nhà.', date: '2026-06-25T09:00:00Z' },
-      { author: 'Nguyễn Văn A', text: 'Chào mừng em gia nhập versa. Chúc em gặt hái nhiều thành công!', date: '2026-06-25T09:45:00Z' }
+      { author: 'Nguyễn Văn A', text: 'Chủ đề này rất thiết thực, tôi chắc chắn sẽ tham gia.', date: '2026-06-25T13:00:00Z' }
     ]
   },
   {
     id: 3,
-    title: '5 Bí quyết cân bằng giữa Công việc và Cuộc sống',
+    title: 'Bình chọn địa điểm du lịch hè Team Building quý 3',
     category: 'Văn hóa',
-    summary: 'Chia sẻ các thói quen nhỏ giúp duy trì sức khỏe tinh thần và năng suất làm việc cao cho nhân viên văn phòng.',
-    content: 'Trong môi trường làm việc năng động, việc duy trì sự cân bằng giữa công việc và đời sống cá nhân là chìa khóa để giữ vững ngọn lửa nhiệt huyết. Dưới đây là 5 bí quyết nhỏ giúp bạn đạt được điều đó:\n\n1. Xác định ranh giới rõ ràng: Tắt thông báo công việc sau giờ làm.\n2. Lập kế hoạch công việc khoa học: Sử dụng Kanban Board trong Power Service để sắp xếp độ ưu tiên.\n3. Dành thời gian cho bản thân: Tập thể dục nhẹ hoặc đọc sách 30 phút mỗi ngày.\n4. Học cách từ chối: Đừng nhận quá nhiều việc ngoài tầm kiểm soát.\n5. Chia sẻ và kết nối: Tham gia các hoạt động team building cùng đồng nghiệp.\n\nHãy bắt đầu từ những thay đổi nhỏ nhất ngay hôm nay!',
-    coverImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800',
-    date: '2026-06-24',
-    author: 'Lê Thị D',
-    likes: 15,
+    type: 'poll',
+    summary: 'Công ty tổ chức lấy ý kiến của toàn thể nhân sự để lựa chọn điểm đến lý tưởng cho chuyến Team Building sắp tới.',
+    content: 'Chào cả nhà,\n\nĐể chuẩn bị cho kỳ nghỉ hè tràn đầy năng lượng, Ban Công đoàn khởi động đợt bình chọn địa điểm du lịch cho quý 3 năm nay.\n\nMọi người hãy bình chọn phương án mình yêu thích nhất dưới đây nhé. Kết quả sẽ được công bố vào tuần sau.',
+    coverImage: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800',
+    date: '2026-06-25',
+    author: 'Trần Thị B',
+    likes: 14,
     status: 'Đã xuất bản',
+    pollOptions: [
+      { text: 'Phú Quốc', votes: 24 },
+      { text: 'Đà Nẵng - Hội An', votes: 15 },
+      { text: 'Nha Trang', votes: 9 }
+    ],
+    userVotedOptionText: null,
+    comments: []
+  },
+  {
+    id: 4,
+    title: 'Chào đón chị Lê Thị D gia nhập phòng HR',
+    category: 'Tin tức',
+    type: 'welcome',
+    summary: 'Chào đón chị Lê Thị D chính thức gia nhập phòng Nhân sự (HR) từ ngày 25/06/2026.',
+    content: 'Chúng ta cùng chào đón chị Lê Thị D gia nhập phòng Nhân sự (HR) của đại gia đình versa.\n\nVới hơn 5 năm kinh nghiệm trong lĩnh vực quản trị nhân sự và tuyển dụng tại các tập đoàn lớn, chị D được kỳ vọng sẽ đóng góp đắc lực vào việc thu hút tài năng và xây dựng đội ngũ nhân sự vững mạnh cho versa.\n\nMọi người hãy cùng gửi lời chúc mừng tới chị D nhé!',
+    coverImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
+    date: '2026-06-25',
+    author: 'Nguyễn Văn A',
+    likes: 35,
+    status: 'Đã xuất bản',
+    welcomeEmployee: 'Lê Thị D',
+    welcomeRole: 'Chuyên viên Content',
+    welcomeDept: 'Marketing',
+    comments: []
+  },
+  {
+    id: 5,
+    title: 'Ý tưởng: Lắp đặt trạm sạc xe điện tại bãi đỗ xe công ty',
+    category: 'Hướng dẫn',
+    type: 'idea',
+    summary: 'Đề xuất lắp đặt thêm 2 cổng sạc xe máy điện công suất tiêu chuẩn tại bãi đỗ xe nhằm khuyến khích sử dụng năng lượng xanh.',
+    content: 'Chào mọi người,\n\nHiện tại số lượng nhân sự sử dụng xe máy điện đi làm tại văn phòng ngày càng tăng. Để tạo điều kiện thuận lợi và hướng tới mục tiêu văn phòng xanh, tôi đề xuất công ty lắp đặt thêm 2 cổng sạc xe điện công suất tiêu chuẩn tại khu vực bãi đỗ xe tầng hầm.\n\nMọi người nghĩ sao về ý tưởng này? Hãy cùng biểu quyết nhé.',
+    coverImage: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=800',
+    date: '2026-06-24',
+    author: 'Phạm Văn C',
+    likes: 18,
+    status: 'Đã xuất bản',
+    ideaScore: 12,
+    userIdeaVote: null,
     comments: [
-      { author: 'Phạm Văn C', text: 'Bài viết rất hữu ích. Tính năng Kanban của app giúp mình quản lý task tốt hơn nhiều.', date: '2026-06-24T14:20:00Z' }
+      { author: 'Trần Thị B', text: 'Ý tưởng rất thực tế, rất ủng hộ!', date: '2026-06-24T15:00:00Z' }
     ]
+  },
+  {
+    id: 6,
+    title: 'Khen thưởng anh Phạm Văn C - Kỹ sư IT nỗ lực vượt bậc',
+    category: 'Văn hóa',
+    type: 'kudos',
+    summary: 'Vinh danh anh Phạm Văn C vì đã có thành tích xuất sắc trong việc khắc phục sự cố hệ thống cơ sở dữ liệu đêm ngày 23/06.',
+    content: 'Ban Giám đốc versa trân trọng vinh danh và khen thưởng đột xuất anh Phạm Văn C - Kỹ sư IT hệ thống.\n\nTrong đêm ngày 23/06/2026, hệ thống cơ sở dữ liệu gặp sự cố kỹ thuật nghiêm trọng. Anh C đã không ngại khó khăn làm việc xuyên đêm để khắc phục và khôi phục hoạt động hệ thống hoàn chỉnh trước 6h sáng, đảm bảo công việc toàn công ty không bị gián đoạn.\n\nSự nhiệt huyết và trách nhiệm của anh C là tấm gương sáng cho tập thể nhân viên versa học tập.',
+    coverImage: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800',
+    date: '2026-06-24',
+    author: 'Nguyễn Văn A',
+    likes: 42,
+    status: 'Đã xuất bản',
+    kudosEmployee: 'Phạm Văn C',
+    kudosBadge: 'Chiến Binh Nỗ Lực',
+    comments: []
+  },
+  {
+    id: 7,
+    title: 'Chúc mọi người một ngày làm việc vui vẻ và hiệu quả!',
+    category: 'Văn hóa',
+    type: 'quick-update',
+    summary: 'Chào buổi sáng cả nhà, chúc mọi người có một ngày mới tràn ngập niềm vui!',
+    content: 'Chào cả nhà versa,\n\nHôm nay thời tiết rất đẹp, chúc mọi người hoàn thành xuất sắc các mục tiêu công việc trong ngày và có những giờ phút làm việc thật vui vẻ cùng đồng nghiệp nhé!',
+    coverImage: '',
+    date: '2026-06-25',
+    author: 'Trần Thị B',
+    likes: 19,
+    status: 'Đã xuất bản',
+    comments: []
   }
 ];
 
@@ -1228,6 +1304,30 @@ function renderBlog() {
   }
 }
 
+// Helper to get type specifications (badge label, icon, class)
+function getPostTypeMeta(type) {
+  switch (type) {
+    case 'announcement':
+      return { label: 'Thông báo', icon: 'megaphone', colorClass: 'thong-bao' };
+    case 'quick-update':
+      return { label: 'Cập nhật nhanh', icon: 'activity', colorClass: 'tin-tuc' };
+    case 'welcome':
+      return { label: 'Chào đón', icon: 'party-popper', colorClass: 'van-hoa' };
+    case 'idea':
+      return { label: 'Ý tưởng', icon: 'lightbulb', colorClass: 'huong-dan' };
+    case 'poll':
+      return { label: 'Bình chọn', icon: 'bar-chart-3', colorClass: 'thong-bao' };
+    case 'discussion':
+      return { label: 'Thảo luận', icon: 'message-square', colorClass: 'tin-tuc' };
+    case 'event':
+      return { label: 'Sự kiện', icon: 'calendar', colorClass: 'tin-tuc' };
+    case 'kudos':
+      return { label: 'Khen thưởng', icon: 'award', colorClass: 'huong-dan' };
+    default:
+      return { label: 'Tin tức', icon: 'megaphone', colorClass: 'tin-tuc' };
+  }
+}
+
 // Render Blog Cards (Grid View)
 function renderBlogGrid(filteredPosts) {
   const container = document.getElementById('blog-grid');
@@ -1246,20 +1346,30 @@ function renderBlogGrid(filteredPosts) {
   filteredPosts.forEach(post => {
     const commentsCount = post.comments ? post.comments.length : 0;
     const authorEmp = employees.find(e => e.name === post.author) || employees[0];
-    const categoryClass = post.category === 'Thông báo' ? 'thong-bao' :
-                          post.category === 'Tin tức' ? 'tin-tuc' :
-                          post.category === 'Văn hóa' ? 'van-hoa' : 'huong-dan';
+    const typeMeta = getPostTypeMeta(post.type);
 
     const card = document.createElement('div');
-    card.className = 'blog-card';
+    
+    // Add specific card layout class
+    let cardClass = 'blog-card';
+    if (post.type === 'quick-update') cardClass += ' quick-update-card';
+    if (post.type === 'kudos') cardClass += ' kudos-card';
+    if (post.type === 'welcome') cardClass += ' welcome-card';
+    if (post.type === 'idea') cardClass += ' idea-card';
+    
+    card.className = cardClass;
     card.setAttribute('data-id', post.id);
+    
+    // Specific icon for post type
+    const iconMarkup = `<span class="blog-type-icon"><i data-lucide="${typeMeta.icon}" style="width:13px;height:13px;"></i></span>`;
+
     card.innerHTML = `
       <div class="blog-card-cover">
-        <img src="${post.coverImage}" alt="${post.title}" loading="lazy">
+        <img src="${post.coverImage || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800'}" alt="${post.title}" loading="lazy">
       </div>
       <div class="blog-card-content">
         <div class="blog-card-header">
-          <span class="category-tag ${categoryClass}">${post.category}</span>
+          <span class="category-tag ${typeMeta.colorClass}">${iconMarkup}${typeMeta.label}</span>
           <span style="font-size: 0.75rem; color: var(--text-muted);">${formatDate(post.date)}</span>
         </div>
         <h3 class="blog-card-title">${post.title}</h3>
@@ -1270,7 +1380,7 @@ function renderBlogGrid(filteredPosts) {
             <span class="blog-card-author-name">${post.author}</span>
           </div>
           <div class="blog-card-stats">
-            <span><i data-lucide="heart" style="width: 13px; height: 13px; fill: currentColor; color: #ef4444;"></i> ${post.likes}</span>
+            <span><i data-lucide="heart" style="width: 13px; height: 13px; fill: ${post.likes > 0 ? 'currentColor' : 'none'}; color: #ef4444;"></i> ${post.likes}</span>
             <span><i data-lucide="message-square" style="width: 13px; height: 13px;"></i> ${commentsCount}</span>
           </div>
         </div>
@@ -1308,6 +1418,7 @@ function renderBlogTable(filteredPosts) {
     const commentsCount = post.comments ? post.comments.length : 0;
     const tr = document.createElement('tr');
     tr.setAttribute('data-id', post.id);
+    const typeMeta = getPostTypeMeta(post.type);
 
     tr.innerHTML = `
       <td>
@@ -1319,12 +1430,9 @@ function renderBlogTable(filteredPosts) {
         </div>
       </td>
       <td>
-        <select class="spreadsheet-select" data-field="category">
-          <option value="Thông báo" ${post.category === 'Thông báo' ? 'selected' : ''}>Thông báo</option>
-          <option value="Tin tức" ${post.category === 'Tin tức' ? 'selected' : ''}>Tin tức</option>
-          <option value="Văn hóa" ${post.category === 'Văn hóa' ? 'selected' : ''}>Văn hóa</option>
-          <option value="Hướng dẫn" ${post.category === 'Hướng dẫn' ? 'selected' : ''}>Hướng dẫn</option>
-        </select>
+        <span class="category-tag ${typeMeta.colorClass}" style="padding: 2px 8px; font-size: 0.75rem; border-radius: 20px;">
+          <i data-lucide="${typeMeta.icon}" style="width:11px; height:11px; vertical-align:middle; margin-right:3px;"></i>${typeMeta.label}
+        </span>
       </td>
       <td>${formatDate(post.date)}</td>
       <td style="font-weight: 700; color: #ef4444;">${post.likes}</td>
@@ -1378,13 +1486,6 @@ function renderBlogTable(filteredPosts) {
       input.addEventListener('blur', saveEdit);
     });
 
-    // Inline select change for category
-    const categorySelect = tr.querySelector('select[data-field="category"]');
-    categorySelect.addEventListener('change', (e) => {
-      post.category = e.target.value;
-      renderBlog();
-    });
-
     // Inline select change for status
     const statusSelect = tr.querySelector('select[data-field="status"]');
     statusSelect.addEventListener('change', (e) => {
@@ -1405,7 +1506,7 @@ window.deletePost = function(id) {
   }
 }
 
-// Open Post Modal (Reading Mode)
+// Open Post Modal (Reading Mode with Interactive Widgets)
 window.openReadPostModal = function(postId) {
   const post = posts.find(p => p.id === postId);
   if (!post) return;
@@ -1416,6 +1517,7 @@ window.openReadPostModal = function(postId) {
 
   const categoryEl = document.getElementById('read-post-category');
   const coverEl = document.getElementById('read-post-cover');
+  const coverWrapper = document.getElementById('read-post-cover-wrapper');
   const titleEl = document.getElementById('read-post-title');
   const authorAvatarEl = document.getElementById('read-post-author-avatar');
   const authorNameEl = document.getElementById('read-post-author');
@@ -1424,15 +1526,24 @@ window.openReadPostModal = function(postId) {
   const contentEl = document.getElementById('read-post-content');
   const commentsCountEl = document.getElementById('read-post-comments-count');
   
-  const categoryClass = post.category === 'Thông báo' ? 'thong-bao' :
-                        post.category === 'Tin tức' ? 'tin-tuc' :
-                        post.category === 'Văn hóa' ? 'van-hoa' : 'huong-dan';
+  const typeMeta = getPostTypeMeta(post.type);
 
   if (categoryEl) {
-    categoryEl.textContent = post.category;
-    categoryEl.className = `category-tag ${categoryClass}`;
+    categoryEl.textContent = typeMeta.label;
+    categoryEl.className = `category-tag ${typeMeta.colorClass}`;
+    categoryEl.innerHTML = `<i data-lucide="${typeMeta.icon}" style="width:13px;height:13px;vertical-align:middle;margin-right:4px;"></i> ${typeMeta.label}`;
   }
-  if (coverEl) coverEl.src = post.coverImage;
+
+  // Cover image handling
+  if (coverWrapper && coverEl) {
+    if (post.type === 'quick-update' || !post.coverImage) {
+      coverWrapper.style.display = 'none';
+    } else {
+      coverWrapper.style.display = 'block';
+      coverEl.src = post.coverImage;
+    }
+  }
+
   if (titleEl) titleEl.textContent = post.title;
   
   const authorEmp = employees.find(e => e.name === post.author) || employees[0];
@@ -1443,10 +1554,69 @@ window.openReadPostModal = function(postId) {
   if (contentEl) contentEl.textContent = post.content;
   if (commentsCountEl) commentsCountEl.textContent = post.comments ? post.comments.length : 0;
 
-  // Render comments list
-  renderComments();
+  // Toggle Type-specific widgets
+  const eventWidget = document.getElementById('read-post-event-widget');
+  const pollWidget = document.getElementById('read-post-poll-widget');
+  const kudosWidget = document.getElementById('read-post-kudos-widget');
+  const ideaWidget = document.getElementById('read-post-idea-widget');
+  const welcomeWidget = document.getElementById('read-post-welcome-widget');
 
-  // Populate comment author list
+  if (eventWidget) eventWidget.style.display = 'none';
+  if (pollWidget) pollWidget.style.display = 'none';
+  if (kudosWidget) kudosWidget.style.display = 'none';
+  if (ideaWidget) ideaWidget.style.display = 'none';
+  if (welcomeWidget) welcomeWidget.style.display = 'none';
+
+  if (post.type === 'event') {
+    if (eventWidget) {
+      eventWidget.style.display = 'block';
+      document.getElementById('read-event-date').textContent = post.eventDate ? formatDate(post.eventDate) : 'Chưa có ngày';
+      document.getElementById('read-event-time').textContent = post.eventTime || 'Chưa có giờ';
+      document.getElementById('read-event-location').textContent = post.eventLocation || 'Chưa rõ';
+      document.getElementById('read-event-rsvp-count').textContent = post.rsvpCount || 0;
+      
+      const rsvpBtn = document.getElementById('rsvp-event-btn');
+      if (rsvpBtn) {
+        if (post.userRsvped) {
+          rsvpBtn.textContent = 'Đã đăng ký tham gia';
+          rsvpBtn.style.background = '#10b981';
+        } else {
+          rsvpBtn.textContent = `Đăng ký tham gia (${post.rsvpCount})`;
+          rsvpBtn.style.background = '#3b82f6';
+        }
+      }
+    }
+  } else if (post.type === 'poll') {
+    if (pollWidget) {
+      pollWidget.style.display = 'block';
+      renderPollWidget(post);
+    }
+  } else if (post.type === 'kudos') {
+    if (kudosWidget) {
+      kudosWidget.style.display = 'block';
+      const kudosEmp = employees.find(e => e.name === post.kudosEmployee) || employees[0];
+      document.getElementById('read-kudos-avatar').src = kudosEmp.avatar;
+      document.getElementById('read-kudos-name').textContent = post.kudosEmployee;
+      document.getElementById('read-kudos-badge').textContent = post.kudosBadge || 'Nhân sự ưu tú';
+    }
+  } else if (post.type === 'welcome') {
+    if (welcomeWidget) {
+      welcomeWidget.style.display = 'block';
+      const welcomeEmp = employees.find(e => e.name === post.welcomeEmployee) || employees[0];
+      document.getElementById('read-welcome-avatar').src = welcomeEmp.avatar;
+      document.getElementById('read-welcome-name').textContent = post.welcomeEmployee;
+      document.getElementById('read-welcome-role').textContent = post.welcomeRole || welcomeEmp.role;
+      document.getElementById('read-welcome-dept').textContent = post.welcomeDept || welcomeEmp.department;
+    }
+  } else if (post.type === 'idea') {
+    if (ideaWidget) {
+      ideaWidget.style.display = 'flex';
+      updateIdeaWidget();
+    }
+  }
+
+  // Render comments list & populate comment author
+  renderComments();
   populateCommentAuthorDropdown();
 
   modal.classList.add('active');
@@ -1512,6 +1682,145 @@ function populateCommentAuthorDropdown() {
   });
 }
 
+// Render dynamic Poll Voting Widget
+function renderPollWidget(post) {
+  const container = document.getElementById('read-poll-options-container');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const options = post.pollOptions || [];
+  const totalVotes = options.reduce((sum, o) => sum + o.votes, 0);
+
+  options.forEach(opt => {
+    const isVoted = post.userVotedOptionText === opt.text;
+    const pct = totalVotes > 0 ? Math.round((opt.votes / totalVotes) * 100) : 0;
+
+    const optItem = document.createElement('div');
+    optItem.className = `poll-option-item ${isVoted ? 'voted' : ''}`;
+    optItem.innerHTML = `
+      <div class="poll-option-progress" style="width: ${pct}%"></div>
+      <div class="poll-option-text">
+        <span>${opt.text} ${isVoted ? '<i data-lucide="check" style="width:12px;height:12px;display:inline-block;vertical-align:middle;margin-left:4px;"></i>' : ''}</span>
+        <span class="poll-option-votes">${opt.votes} phiếu (${pct}%)</span>
+      </div>
+    `;
+
+    optItem.addEventListener('click', () => {
+      // Toggle vote logic
+      if (post.userVotedOptionText === opt.text) {
+        post.userVotedOptionText = null;
+        opt.votes = Math.max(0, opt.votes - 1);
+      } else {
+        if (post.userVotedOptionText) {
+          const prevOpt = options.find(o => o.text === post.userVotedOptionText);
+          if (prevOpt) prevOpt.votes = Math.max(0, prevOpt.votes - 1);
+        }
+        post.userVotedOptionText = opt.text;
+        opt.votes += 1;
+      }
+      renderPollWidget(post);
+      renderBlog();
+    });
+
+    container.appendChild(optItem);
+  });
+
+  lucide.createIcons();
+}
+
+// Update Idea Vote score in widget
+function updateIdeaWidget() {
+  if (!activeReadingPost) return;
+  document.getElementById('read-idea-score').textContent = activeReadingPost.ideaScore;
+  const upBtn = document.getElementById('upvote-idea-btn');
+  const downBtn = document.getElementById('downvote-idea-btn');
+  
+  if (activeReadingPost.userIdeaVote === 'up') {
+    upBtn.style.background = '#10b981';
+    upBtn.style.color = '#fff';
+    downBtn.style.background = '';
+    downBtn.style.color = '';
+  } else if (activeReadingPost.userIdeaVote === 'down') {
+    downBtn.style.background = '#ef4444';
+    downBtn.style.color = '#fff';
+    upBtn.style.background = '';
+    upBtn.style.color = '';
+  } else {
+    upBtn.style.background = '';
+    upBtn.style.color = '';
+    downBtn.style.background = '';
+    downBtn.style.color = '';
+  }
+}
+
+// Attach Event RSVP click
+const rsvpEventBtn = document.getElementById('rsvp-event-btn');
+if (rsvpEventBtn) {
+  rsvpEventBtn.addEventListener('click', () => {
+    if (activeReadingPost && activeReadingPost.type === 'event') {
+      if (activeReadingPost.userRsvped) {
+        activeReadingPost.userRsvped = false;
+        activeReadingPost.rsvpCount = Math.max(0, activeReadingPost.rsvpCount - 1);
+      } else {
+        activeReadingPost.userRsvped = true;
+        activeReadingPost.rsvpCount += 1;
+      }
+      
+      document.getElementById('read-event-rsvp-count').textContent = activeReadingPost.rsvpCount;
+      if (activeReadingPost.userRsvped) {
+        rsvpEventBtn.textContent = 'Đã đăng ký tham gia';
+        rsvpEventBtn.style.background = '#10b981';
+      } else {
+        rsvpEventBtn.textContent = `Đăng ký tham gia (${activeReadingPost.rsvpCount})`;
+        rsvpEventBtn.style.background = '#3b82f6';
+      }
+      renderBlog();
+    }
+  });
+}
+
+// Attach Upvote/Downvote click handlers
+const upvoteIdeaBtn = document.getElementById('upvote-idea-btn');
+const downvoteIdeaBtn = document.getElementById('downvote-idea-btn');
+
+if (upvoteIdeaBtn && downvoteIdeaBtn) {
+  upvoteIdeaBtn.addEventListener('click', () => {
+    if (activeReadingPost && activeReadingPost.type === 'idea') {
+      if (activeReadingPost.userIdeaVote === 'up') {
+        activeReadingPost.userIdeaVote = null;
+        activeReadingPost.ideaScore -= 1;
+      } else {
+        if (activeReadingPost.userIdeaVote === 'down') {
+          activeReadingPost.ideaScore += 2;
+        } else {
+          activeReadingPost.ideaScore += 1;
+        }
+        activeReadingPost.userIdeaVote = 'up';
+      }
+      updateIdeaWidget();
+      renderBlog();
+    }
+  });
+
+  downvoteIdeaBtn.addEventListener('click', () => {
+    if (activeReadingPost && activeReadingPost.type === 'idea') {
+      if (activeReadingPost.userIdeaVote === 'down') {
+        activeReadingPost.userIdeaVote = null;
+        activeReadingPost.ideaScore += 1;
+      } else {
+        if (activeReadingPost.userIdeaVote === 'up') {
+          activeReadingPost.ideaScore -= 2;
+        } else {
+          activeReadingPost.ideaScore -= 1;
+        }
+        activeReadingPost.userIdeaVote = 'down';
+      }
+      updateIdeaWidget();
+      renderBlog();
+    }
+  });
+}
+
 // Attach Like event
 const likePostBtn = document.getElementById('like-post-btn');
 if (likePostBtn) {
@@ -1564,6 +1873,66 @@ if (viewPostCloseBtn) {
   });
 }
 
+// Dynamic fields rendering inside Add Post Modal based on selected type
+function handlePostTypeFormFields() {
+  const typeSelect = document.getElementById('post-type-select');
+  if (!typeSelect) return;
+
+  const selectedType = typeSelect.value;
+  
+  const welcomeGroup = document.getElementById('form-group-welcome');
+  const kudosGroup = document.getElementById('form-group-kudos');
+  const pollGroup = document.getElementById('form-group-poll');
+  const eventGroup = document.getElementById('form-group-event');
+  const coverSelectGroup = document.getElementById('post-cover-select').closest('.form-group');
+
+  if (welcomeGroup) welcomeGroup.style.display = 'none';
+  if (kudosGroup) kudosGroup.style.display = 'none';
+  if (pollGroup) pollGroup.style.display = 'none';
+  if (eventGroup) eventGroup.style.display = 'none';
+  if (coverSelectGroup) coverSelectGroup.style.display = 'block';
+
+  // Toggle dynamic parts
+  if (selectedType === 'welcome') {
+    if (welcomeGroup) welcomeGroup.style.display = 'block';
+  } else if (selectedType === 'kudos') {
+    if (kudosGroup) kudosGroup.style.display = 'flex';
+  } else if (selectedType === 'poll') {
+    if (pollGroup) pollGroup.style.display = 'block';
+  } else if (selectedType === 'event') {
+    if (eventGroup) eventGroup.style.display = 'flex';
+  } else if (selectedType === 'quick-update') {
+    if (coverSelectGroup) coverSelectGroup.style.display = 'none';
+    document.getElementById('post-custom-cover-group').style.display = 'none';
+    document.getElementById('post-local-cover-group').style.display = 'none';
+  }
+}
+
+// Populate welcome & kudos selections
+function populateWelcomeAndKudosEmployees() {
+  const welcomeSelect = document.getElementById('post-welcome-employee');
+  const kudosSelect = document.getElementById('post-kudos-employee');
+  
+  if (welcomeSelect) {
+    welcomeSelect.innerHTML = '';
+    employees.forEach(emp => {
+      const opt = document.createElement('option');
+      opt.value = emp.name;
+      opt.textContent = `${emp.name} (${emp.role})`;
+      welcomeSelect.appendChild(opt);
+    });
+  }
+  if (kudosSelect) {
+    kudosSelect.innerHTML = '';
+    employees.forEach(emp => {
+      const opt = document.createElement('option');
+      opt.value = emp.name;
+      opt.textContent = `${emp.name} (${emp.role})`;
+      kudosSelect.appendChild(opt);
+    });
+  }
+}
+
 // Write Post Modal actions
 const writePostBtn = document.getElementById('write-post-btn');
 const addPostModal = document.getElementById('add-post-modal');
@@ -1584,6 +1953,11 @@ if (writePostBtn && addPostModal) {
         authorSelect.appendChild(opt);
       });
     }
+
+    // Populate dynamic employee selects & reset dynamic layout
+    populateWelcomeAndKudosEmployees();
+    handlePostTypeFormFields();
+
     addPostModal.classList.add('active');
   });
 }
@@ -1592,72 +1966,132 @@ function closePostModal() {
   if (addPostModal) {
     addPostModal.classList.remove('active');
     postForm.reset();
-    const customGroup = document.getElementById('post-custom-cover-group');
-    if (customGroup) customGroup.style.display = 'none';
+    document.getElementById('post-custom-cover-group').style.display = 'none';
+    document.getElementById('post-local-cover-group').style.display = 'none';
   }
 }
 
 if (postModalClose) postModalClose.addEventListener('click', closePostModal);
 if (postModalCancel) postModalCancel.addEventListener('click', closePostModal);
 
-// Toggle custom cover input
+// Toggle dynamic form fields when type changes
+const postTypeSelect = document.getElementById('post-type-select');
+if (postTypeSelect) {
+  postTypeSelect.addEventListener('change', handlePostTypeFormFields);
+}
+
+// Toggle cover preview mode
 const postCoverSelect = document.getElementById('post-cover-select');
 if (postCoverSelect) {
   postCoverSelect.addEventListener('change', (e) => {
     const customGroup = document.getElementById('post-custom-cover-group');
-    if (customGroup) {
+    const localGroup = document.getElementById('post-local-cover-group');
+    
+    if (customGroup && localGroup) {
       if (e.target.value === 'custom') {
         customGroup.style.display = 'block';
-        const customInput = document.getElementById('post-custom-cover');
-        if (customInput) customInput.required = true;
+        localGroup.style.display = 'none';
+        document.getElementById('post-custom-cover').required = true;
+      } else if (e.target.value === 'local') {
+        localGroup.style.display = 'block';
+        customGroup.style.display = 'none';
+        document.getElementById('post-custom-cover').required = false;
       } else {
         customGroup.style.display = 'none';
-        const customInput = document.getElementById('post-custom-cover');
-        if (customInput) customInput.required = false;
+        localGroup.style.display = 'none';
+        document.getElementById('post-custom-cover').required = false;
       }
     }
   });
+}
+
+// Save post helper function
+function saveNewPost(coverImageUrl) {
+  const title = document.getElementById('post-title').value;
+  const category = document.getElementById('post-category').value;
+  const author = document.getElementById('post-author').value;
+  const type = document.getElementById('post-type-select').value;
+  const summary = document.getElementById('post-summary').value;
+  const content = document.getElementById('post-content').value;
+
+  const newPost = {
+    id: Date.now(),
+    title,
+    category,
+    author,
+    summary,
+    content,
+    coverImage: coverImageUrl,
+    date: new Date().toISOString().split('T')[0],
+    likes: 0,
+    status: 'Đã xuất bản',
+    comments: [],
+    type: type
+  };
+
+  // Type-specific field packing
+  if (type === 'event') {
+    newPost.eventDate = document.getElementById('post-event-date').value;
+    newPost.eventTime = document.getElementById('post-event-time').value;
+    newPost.eventLocation = document.getElementById('post-event-location').value;
+    newPost.rsvpCount = 0;
+    newPost.userRsvped = false;
+  } else if (type === 'poll') {
+    const rawOptions = document.getElementById('post-poll-options').value;
+    const optionsArray = rawOptions.split(',').map(o => o.trim()).filter(o => o !== '');
+    newPost.pollOptions = optionsArray.map(opt => ({ text: opt, votes: 0 }));
+    newPost.userVotedOptionText = null;
+  } else if (type === 'welcome') {
+    newPost.welcomeEmployee = document.getElementById('post-welcome-employee').value;
+    const emp = employees.find(e => e.name === newPost.welcomeEmployee) || employees[0];
+    newPost.welcomeRole = emp.role;
+    newPost.welcomeDept = emp.department;
+  } else if (type === 'kudos') {
+    newPost.kudosEmployee = document.getElementById('post-kudos-employee').value;
+    newPost.kudosBadge = document.getElementById('post-kudos-badge').value;
+  } else if (type === 'idea') {
+    newPost.ideaScore = 0;
+    newPost.userIdeaVote = null;
+  }
+
+  posts.unshift(newPost);
+  renderBlog();
+  closePostModal();
 }
 
 // Add post Form Submit
 if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const title = document.getElementById('post-title').value;
-    const category = document.getElementById('post-category').value;
-    const author = document.getElementById('post-author').value;
     const coverType = document.getElementById('post-cover-select').value;
-    const summary = document.getElementById('post-summary').value;
-    const content = document.getElementById('post-content').value;
+    const type = document.getElementById('post-type-select').value;
 
-    let coverImage = '';
-    if (coverType === 'tech') {
-      coverImage = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800';
-    } else if (coverType === 'office') {
-      coverImage = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800';
-    } else if (coverType === 'team') {
-      coverImage = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800';
+    if (type !== 'quick-update' && coverType === 'local') {
+      const fileInput = document.getElementById('post-local-file');
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          saveNewPost(event.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        alert('Vui lòng chọn file ảnh từ máy tính để tải lên.');
+      }
     } else {
-      coverImage = document.getElementById('post-custom-cover').value || 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800';
+      let coverImage = '';
+      if (type === 'quick-update') {
+        coverImage = '';
+      } else if (coverType === 'tech') {
+        coverImage = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800';
+      } else if (coverType === 'office') {
+        coverImage = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800';
+      } else if (coverType === 'team') {
+        coverImage = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800';
+      } else {
+        coverImage = document.getElementById('post-custom-cover').value || 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800';
+      }
+      saveNewPost(coverImage);
     }
-
-    const newPost = {
-      id: Date.now(),
-      title,
-      category,
-      author,
-      summary,
-      content,
-      coverImage,
-      date: new Date().toISOString().split('T')[0],
-      likes: 0,
-      status: 'Đã xuất bản',
-      comments: []
-    };
-
-    posts.unshift(newPost);
-    renderBlog();
-    closePostModal();
   });
 }
 
@@ -1698,4 +2132,5 @@ if (blogSearchInputEl) {
     renderBlog();
   });
 }
+
 

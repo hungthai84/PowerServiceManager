@@ -914,6 +914,77 @@
         <div id="read-post-content" style="font-size: 1rem; color: var(--text-main); line-height: 1.7; text-align: left; margin-bottom: 30px; white-space: pre-wrap;">
         </div>
 
+        <!-- SPECIAL EVENT WIDGET -->
+        <div id="read-post-event-widget" style="display: none; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); padding: 16px; border-radius: 10px; margin-bottom: 24px; text-align: left;">
+          <h3 style="font-size: 1rem; font-weight: 700; color: #3b82f6; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="calendar"></i> Thông tin Sự kiện
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 0.85rem; color: var(--text-main); margin-bottom: 12px;">
+            <div><strong>Ngày:</strong> <span id="read-event-date"></span></div>
+            <div><strong>Giờ:</strong> <span id="read-event-time"></span></div>
+            <div><strong>Địa điểm:</strong> <span id="read-event-location"></span></div>
+          </div>
+          <button id="rsvp-event-btn" class="btn-primary" style="background: #3b82f6; font-size: 0.85rem; padding: 6px 16px; box-shadow: none;">
+            <i data-lucide="check"></i> Đăng ký tham gia (<span id="read-event-rsvp-count">0</span>)
+          </button>
+        </div>
+
+        <!-- SPECIAL POLL WIDGET -->
+        <div id="read-post-poll-widget" style="display: none; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); padding: 20px; border-radius: 10px; margin-bottom: 24px; text-align: left;">
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="bar-chart-3"></i> Bình chọn Ý kiến
+          </h3>
+          <div id="read-poll-options-container" style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- SPECIAL KUDOS WIDGET -->
+        <div id="read-post-kudos-widget" style="display: none; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); padding: 18px; border-radius: 10px; margin-bottom: 24px; text-align: center; position: relative; overflow: hidden;">
+          <i data-lucide="trophy" style="position: absolute; right: 10px; bottom: 10px; width: 80px; height: 80px; color: rgba(245, 158, 11, 0.15); pointer-events: none;"></i>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #d97706; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <i data-lucide="award"></i> Vinh Danh Khen Thưởng <i data-lucide="award"></i>
+          </h3>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <img id="read-kudos-avatar" src="" alt="Awardee" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #f59e0b; box-shadow: var(--card-shadow); object-fit: cover;">
+            <span id="read-kudos-name" style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);"></span>
+            <span id="read-kudos-badge" style="background: #f59e0b; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;"></span>
+          </div>
+        </div>
+
+        <!-- SPECIAL IDEA WIDGET -->
+        <div id="read-post-idea-widget" style="display: none; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15); padding: 16px; border-radius: 10px; margin-bottom: 24px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 8px; border-radius: 8px;">
+              <i data-lucide="lightbulb" style="width: 24px; height: 24px;"></i>
+            </div>
+            <div>
+              <h4 style="font-weight: 700; color: #10b981; margin: 0;">Biểu quyết Ý tưởng</h4>
+              <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">Hãy bầu chọn cho mức độ khả thi của ý tưởng này.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="upvote-idea-btn" class="btn-secondary" style="padding: 6px 12px; border-radius: 20px; color: #10b981; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i> <span id="read-idea-score">0</span>
+            </button>
+            <button id="downvote-idea-btn" class="btn-secondary" style="padding: 6px 12px; border-radius: 20px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="arrow-down" style="width: 16px; height: 16px;"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- SPECIAL WELCOME WIDGET -->
+        <div id="read-post-welcome-widget" style="display: none; background: rgba(236, 72, 153, 0.08); border: 1px solid rgba(236, 72, 153, 0.15); padding: 18px; border-radius: 10px; margin-bottom: 24px; text-align: center;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #db2777; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <i data-lucide="party-popper"></i> Chào Mừng Thành Viên Mới <i data-lucide="party-popper"></i>
+          </h3>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <img id="read-welcome-avatar" src="" alt="New Employee" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #ec4899; object-fit: cover;">
+            <span id="read-welcome-name" style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);"></span>
+            <span style="font-size: 0.85rem; color: var(--text-muted);"><span id="read-welcome-role"></span> - Phòng <span id="read-welcome-dept"></span></span>
+          </div>
+        </div>
+
         <!-- COMMENTS SECTION -->
         <div style="border-top: 1px solid var(--border-color); padding-top: 24px; text-align: left;">
           <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
@@ -949,6 +1020,19 @@
       </div>
       <form id="post-form">
         <div class="form-group">
+          <label for="post-type-select">Loại tin tức</label>
+          <select id="post-type-select" required>
+            <option value="announcement">Thông báo mới</option>
+            <option value="quick-update">Cập nhật nhanh (Status)</option>
+            <option value="welcome">Chào đón thành viên mới</option>
+            <option value="idea">Chia sẻ một ý tưởng</option>
+            <option value="poll">Bình chọn (Poll)</option>
+            <option value="discussion">Thảo luận mới</option>
+            <option value="event">Sự kiện</option>
+            <option value="kudos">Khen thưởng (Kudos)</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="post-title">Tiêu đề bài viết</label>
           <input type="text" id="post-title" required placeholder="e.g. Thông báo nghỉ lễ và lịch làm việc bù">
         </div>
@@ -969,6 +1053,42 @@
             </select>
           </div>
         </div>
+        <div class="form-group" id="form-group-welcome" style="display: none;">
+          <label for="post-welcome-employee">Chọn nhân sự mới gia nhập</label>
+          <select id="post-welcome-employee">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+        <div class="form-row" id="form-group-kudos" style="display: none;">
+          <div class="form-group">
+            <label for="post-kudos-employee">Nhân sự được khen thưởng</label>
+            <select id="post-kudos-employee">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="post-kudos-badge">Danh hiệu / Thành tích</label>
+            <input type="text" id="post-kudos-badge" placeholder="e.g. Nhân viên xuất sắc nhất tháng">
+          </div>
+        </div>
+        <div class="form-group" id="form-group-poll" style="display: none;">
+          <label for="post-poll-options">Các phương án bình chọn (nhập cách nhau bằng dấu phẩy)</label>
+          <input type="text" id="post-poll-options" placeholder="e.g. Rất đồng ý, Đồng ý, Không đồng ý">
+        </div>
+        <div class="form-row" id="form-group-event" style="display: none;">
+          <div class="form-group">
+            <label for="post-event-date">Ngày diễn ra</label>
+            <input type="date" id="post-event-date">
+          </div>
+          <div class="form-group">
+            <label for="post-event-time">Giờ diễn ra</label>
+            <input type="time" id="post-event-time">
+          </div>
+          <div class="form-group">
+            <label for="post-event-location">Địa điểm</label>
+            <input type="text" id="post-event-location" placeholder="e.g. Lotus Meeting Room / Zoom link">
+          </div>
+        </div>
         <div class="form-group">
           <label for="post-cover-select">Chọn ảnh bìa mẫu</label>
           <select id="post-cover-select">
@@ -976,11 +1096,16 @@
             <option value="office">Môi trường Văn phòng (Unsplash Office)</option>
             <option value="team">Team building & Sự kiện (Unsplash Team)</option>
             <option value="custom">Đường dẫn ảnh tự chọn (URL)</option>
+            <option value="local">Tải ảnh từ máy tính (Local upload)</option>
           </select>
         </div>
         <div class="form-group" id="post-custom-cover-group" style="display: none;">
           <label for="post-custom-cover">URL ảnh bìa tự chọn</label>
           <input type="url" id="post-custom-cover" placeholder="https://images.unsplash.com/... hoặc link ảnh bất kỳ">
+        </div>
+        <div class="form-group" id="post-local-cover-group" style="display: none;">
+          <label for="post-local-file">Chọn file ảnh từ máy của bạn</label>
+          <input type="file" id="post-local-file" accept="image/*">
         </div>
         <div class="form-group">
           <label for="post-summary">Tóm tắt ngắn</label>
